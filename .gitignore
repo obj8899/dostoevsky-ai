@@ -1,0 +1,29 @@
+﻿# Downloaded literary corpus
+data/raw/
+data/processed/
+
+# Model weights and training artifacts
+*.gguf
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.onnx
+adapters/
+checkpoints/
+runs/
+wandb/
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
