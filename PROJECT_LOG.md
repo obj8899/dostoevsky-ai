@@ -1,6 +1,6 @@
+﻿
 
-
-# Dostoevsky AI — Project Log
+# Dostoevsky AI â€” Project Log
 
 
 
@@ -8,7 +8,7 @@
 
 
 
-**Project:** Dostoevsky AI — A Literary Writing and Vocabulary Assistant
+**Project:** Dostoevsky AI â€” A Literary Writing and Vocabulary Assistant
 
 
 
@@ -108,7 +108,7 @@ The configured baseline uses a system prompt and generation parameters. It has n
 
 
 
-### Test 1 — Literary Rewrite
+### Test 1 â€” Literary Rewrite
 
 
 
@@ -124,7 +124,7 @@ The configured baseline uses a system prompt and generation parameters. It has n
 
 
 
-### Test 2 — Word Cabinet
+### Test 2 â€” Word Cabinet
 
 
 
@@ -140,7 +140,7 @@ The configured baseline uses a system prompt and generation parameters. It has n
 
 
 
-### Test 3 — Psychological Monologue
+### Test 3 â€” Psychological Monologue
 
 
 
@@ -212,7 +212,7 @@ These are qualitative observations from three manually executed tests, not a for
 
 ## 8. Progress Entry Template
 
-### 2026-10-23 — Phase 1 Completion
+### 2026-10-23 â€” Phase 1 Completion
 
 - **Action completed:** Installed and verified Ollama, downloaded Qwen2.5 3B, created the `dostoevsky-baseline` Modelfile, tested three literary tasks, created project directories, and initialized the project log.
 - **Commands or configuration:** `ollama --version`, `ollama list`, `ollama create dostoevsky-baseline -f .\Modelfile`, and `ollama run dostoevsky-baseline`.
@@ -224,7 +224,7 @@ These are qualitative observations from three manually executed tests, not a for
 
 
 
-### \[Date] — \[Phase and Step]
+### \[Date] â€” \[Phase and Step]
 
 
 
@@ -247,4 +247,29 @@ These are qualitative observations from three manually executed tests, not a for
 Record only actions actually performed and results actually observed.
 
 
+
+## Phase 2 â€” Corpus Cleaning and Initial Validation
+
+Status: Cleaning script implemented; initial structural validation passed.
+
+### Actions completed
+- Extracted literary text between Project Gutenberg markers.
+- Removed the contents listing from both cleaned books.
+- Preserved the translator's preface in Crime and Punishment.
+- Verified selected headings: Part I, Part II, Chapter I, Chapter II, and Epilogue.
+- Removed publisher material after the final story in White Nights and Other Stories.
+- Normalized whitespace and paragraph boundaries.
+- Generated data/processed/corpus_report.json.
+- Confirmed zero remaining Gutenberg markers and zero Unicode replacement characters in the checked Crime and Punishment output.
+- Confirmed both processed text files are excluded from Git.
+
+### Verification limitations
+- Selected headings and ending boundaries were checked; complete chapter-by-chapter integrity has not yet been verified.
+- The UTF-8 apostrophe was verified through Python decoding; the unusual terminal rendering is not evidence of file corruption.
+- Raw and processed literary texts remain excluded from Git.
+
+### Next pending step
+- Review the project log and Git staging area.
+- Commit and push the corpus-cleaning script and project log.
+- Continue corpus integrity checks before preparing the evaluation dataset.
 
