@@ -1,0 +1,270 @@
+
+{
+  "suite_name": "Dostoevsky AI Baseline Evaluation",
+  "suite_version": "1.0.0",
+  "description": "Fixed human-scored tests for the prompt-configured local baseline.",
+  "model": "dostoevsky-baseline:latest",
+  "ollama_version": "0.40.10",
+  "generation_settings": {
+    "temperature": 0.85,
+    "top_p": 0.9,
+    "repeat_penalty": 1.1,
+    "num_ctx": 4096,
+    "num_predict": 512
+  },
+  "scoring": {
+    "scale_min": 1,
+    "scale_max": 5,
+    "guidance": {
+      "1": "Serious failure",
+      "2": "Weak performance",
+      "3": "Acceptable with noticeable issues",
+      "4": "Strong with minor issues",
+      "5": "Excellent performance"
+    },
+    "method": "Human scoring with written evidence. Do not use the evaluated model as its own judge."
+  },
+  "test_cases": [
+    {
+      "id": "LR01",
+      "feature": "literary_rewrite",
+      "name": "Meaning preservation",
+      "prompt": "Rewrite the following in psychologically nuanced literary prose in 100 words or fewer. Preserve the facts and intended meaning: I was angry with my friend because he forgot our meeting. When he apologized, I said it was fine, but I avoided him for the rest of the day.",
+      "criteria": [
+        "Preserves the forgotten meeting, anger, apology, verbal forgiveness, and subsequent avoidance.",
+        "Reveals the contradiction between spoken forgiveness and actual behavior.",
+        "Uses specific psychological detail rather than merely naming emotions."
+      ],
+      "failure_conditions": [
+        "Changes or omits a central event.",
+        "Invents a major event that changes the meaning.",
+        "Exceeds the requested length substantially."
+      ]
+    },
+    {
+      "id": "LR02",
+      "feature": "literary_rewrite",
+      "name": "Emotional subtlety",
+      "prompt": "Rewrite this in restrained, psychologically revealing prose in 100 words or fewer. Avoid melodrama: She received praise for her work, thanked everyone, and went home wondering whether they had praised her only because they felt sorry for her.",
+      "criteria": [
+        "Shows insecurity through plausible thoughts or behavior.",
+        "Maintains a restrained and believable emotional tone.",
+        "Preserves the praise, thanks, and private doubt."
+      ],
+      "failure_conditions": [
+        "Turns the scene into extreme despair or theatrical suffering.",
+        "Treats the character's suspicion as established fact.",
+        "Adds an unrelated dramatic event."
+      ]
+    },
+    {
+      "id": "LR03",
+      "feature": "literary_rewrite",
+      "name": "Concrete psychological detail",
+      "prompt": "Rewrite this in psychologically complex prose in 100 words or fewer: He wanted to confess that he had lied, but whenever the opportunity came, he changed the subject and complained that nobody trusted him.",
+      "criteria": [
+        "Makes the conflict between guilt and self-protection clear.",
+        "Uses specific behavior or subtext to reveal the conflict.",
+        "Avoids excessive abstract commentary."
+      ],
+      "failure_conditions": [
+        "Removes the lie or the avoidance of confession.",
+        "Explains the character's psychology without developing the scene at all.",
+        "Ends with a generic moral lesson."
+      ]
+    },
+    {
+      "id": "LR04",
+      "feature": "literary_rewrite",
+      "name": "Avoiding repetitive abstraction",
+      "prompt": "Rewrite this in literary prose in 120 words or fewer. Use varied sentences and meaningful details: I was lonely at the party. Everyone was talking. I pretended to be busy with my phone because I did not know how to join them.",
+      "criteria": [
+        "Preserves the party, loneliness, phone use, and difficulty joining conversations.",
+        "Uses varied sentence structures and meaningful detail.",
+        "Communicates alienation without repeatedly naming loneliness."
+      ],
+      "failure_conditions": [
+        "Repeats the same emotional claim without adding meaning.",
+        "Changes the central situation.",
+        "Uses ornamental language that obscures what is happening."
+      ]
+    },
+    {
+      "id": "LR05",
+      "feature": "literary_rewrite",
+      "name": "Format and length following",
+      "prompt": "Rewrite this in psychologically nuanced prose in exactly two sentences, with no more than 60 words total: I returned the money I had found on the floor. I wanted the owner to notice how honest I was.",
+      "criteria": [
+        "Produces exactly two sentences.",
+        "Stays within 60 words.",
+        "Preserves both the returned money and the desire for recognition.",
+        "Reveals the tension between honesty and vanity."
+      ],
+      "failure_conditions": [
+        "Produces a number of sentences other than two.",
+        "Exceeds 60 words.",
+        "Omits the desire for recognition."
+      ]
+    },
+    {
+      "id": "WC01",
+      "feature": "word_cabinet",
+      "name": "Precise vocabulary selection",
+      "prompt": "I feel pleasure when someone who underestimated me fails, but I am also ashamed of enjoying it. Suggest three precise words or expressions for this emotional state. Define each, explain its connotations and intensity, distinguish it from similar terms, and give one natural example sentence per item.",
+      "criteria": [
+        "Selects words or expressions that fit pleasure at another's misfortune and the accompanying shame.",
+        "Distinguishes the concepts accurately rather than treating synonyms as identical.",
+        "Provides definitions, connotations, intensity, comparisons, and natural examples."
+      ],
+      "failure_conditions": [
+        "Provides unrelated emotional vocabulary.",
+        "Invents definitions or presents uncertain distinctions as established fact.",
+        "Omits most of the requested explanatory elements."
+      ]
+    },
+    {
+      "id": "WC02",
+      "feature": "word_cabinet",
+      "name": "Fine-grained emotional distinctions",
+      "prompt": "Explain the differences between guilt, shame, remorse, and regret. Give a concise definition, distinguish the emotional focus of each, and provide one natural example for each. Do not claim that the words are perfectly interchangeable.",
+      "criteria": [
+        "Accurately explains the central meaning of each term.",
+        "Distinguishes actions and responsibility from self-evaluation and retrospective disappointment where appropriate.",
+        "Uses examples that fit each term."
+      ],
+      "failure_conditions": [
+        "Treats all four words as exact synonyms.",
+        "Gives examples inconsistent with the definitions.",
+        "Makes absolute claims about distinctions that depend on context."
+      ]
+    },
+    {
+      "id": "WC03",
+      "feature": "word_cabinet",
+      "name": "Intensity and connotation",
+      "prompt": "Suggest four expressions for someone who outwardly accepts an insult but privately continues to resent it. Arrange them from relatively mild to relatively intense where meaningful. Explain the connotations and note any important differences in meaning.",
+      "criteria": [
+        "Provides expressions appropriate to concealed resentment.",
+        "Explains connotations and meaningful differences.",
+        "Uses a sensible intensity ordering or explains why a strict ordering is inappropriate."
+      ],
+      "failure_conditions": [
+        "Includes words unrelated to resentment or concealed hurt.",
+        "Presents a subjective intensity ranking as universally fixed.",
+        "Fails to explain the selected expressions."
+      ]
+    },
+    {
+      "id": "WC04",
+      "feature": "word_cabinet",
+      "name": "Context-sensitive word choice",
+      "prompt": "A person refuses help because accepting it would make them feel indebted, although they desperately need it. Suggest three precise words or expressions that could describe this person's attitude or emotional conflict. Explain how their meanings differ and give one natural example for each.",
+      "criteria": [
+        "Identifies concepts relevant to pride, indebtedness, vulnerability, or resistance to dependence.",
+        "Distinguishes related terms rather than forcing one exact label onto a complex state.",
+        "Provides natural examples consistent with the meanings."
+      ],
+      "failure_conditions": [
+        "Confuses the need for help with unwillingness to receive it.",
+        "Provides only generic emotion words without explaining their fit.",
+        "Invents psychological diagnoses."
+      ]
+    },
+    {
+      "id": "WC05",
+      "feature": "word_cabinet",
+      "name": "Natural usage and register",
+      "prompt": "Explain the difference between 'resentment', 'indignation', and 'bitterness'. For each, provide a concise definition, a note on connotation or register, and one natural sentence. Explain why replacing one with another may change the tone.",
+      "criteria": [
+        "Provides defensible definitions and contextual distinctions.",
+        "Uses each word naturally in a fitting sentence.",
+        "Explains how substitutions affect tone or implication."
+      ],
+      "failure_conditions": [
+        "Gives circular definitions that do not distinguish the words.",
+        "Uses a word incorrectly in its example.",
+        "Claims the terms have identical meanings in every context."
+      ]
+    },
+    {
+      "id": "IM01",
+      "feature": "inner_monologue",
+      "name": "Conflicting motives",
+      "prompt": "Write an original inner monologue of 180–250 words. The narrator has taken credit for a colleague's idea and is about to receive public praise. They want to confess but also fear losing their reputation. Show both motives without resolving the conflict neatly.",
+      "criteria": [
+        "Makes the desire to confess and the fear of reputational loss both credible.",
+        "Develops the conflict through thought, rationalization, and self-questioning.",
+        "Leaves the moral conflict meaningfully unresolved."
+      ],
+      "failure_conditions": [
+        "Ignores either major motive.",
+        "Resolves the conflict through an abrupt, simplistic moral decision.",
+        "Does not produce an inner monologue."
+      ]
+    },
+    {
+      "id": "IM02",
+      "feature": "inner_monologue",
+      "name": "Psychological realism",
+      "prompt": "Write an original inner monologue of 180–250 words. A student has received a better grade than a close friend who studied harder. The student feels pleased, guilty about that pleasure, and resentful that they feel guilty. Keep the reactions psychologically believable.",
+      "criteria": [
+        "Develops the coexistence of pleasure, guilt, and resentment.",
+        "Uses believable self-justification and contradiction.",
+        "Avoids reducing the character to a simple hero or villain."
+      ],
+      "failure_conditions": [
+        "Collapses the emotional conflict into one uncomplicated feeling.",
+        "Uses implausibly extreme reactions without contextual support.",
+        "Relies on generic declarations instead of developing the inner conflict."
+      ]
+    },
+    {
+      "id": "IM03",
+      "feature": "inner_monologue",
+      "name": "Coherent psychological progression",
+      "prompt": "Write an original inner monologue of 180–250 words. A person is considering apologizing to a sibling after a cruel argument but keeps remembering old grievances as reasons not to apologize. Develop the thought process in a coherent progression without deciding the issue for the reader.",
+      "criteria": [
+        "Connects the current argument with remembered grievances.",
+        "Shows how the narrator uses the past to justify present inaction.",
+        "Maintains a coherent progression while preserving ambiguity."
+      ],
+      "failure_conditions": [
+        "Jumps between unrelated thoughts without a discernible connection.",
+        "Turns into a plot summary or dialogue-only scene.",
+        "Ends with a simplistic declaration that settles the conflict."
+      ]
+    },
+    {
+      "id": "IM04",
+      "feature": "inner_monologue",
+      "name": "Originality and specificity",
+      "prompt": "Write an original inner monologue of 180–250 words. A person attends the farewell gathering of a colleague they privately disliked, yet feels unexpectedly distressed when the colleague leaves. Explore possible reasons for this reaction without asserting a single definitive explanation.",
+      "criteria": [
+        "Explores plausible reasons for the unexpected distress.",
+        "Uses specific observations or memories to ground the emotion.",
+        "Maintains interpretive ambiguity and avoids stock philosophical conclusions."
+      ],
+      "failure_conditions": [
+        "Copies recognizable passages from existing literature.",
+        "Uses generic reflections without engaging with the farewell situation.",
+        "Declares one explanation unquestionably correct without support."
+      ]
+    },
+    {
+      "id": "IM05",
+      "feature": "inner_monologue",
+      "name": "Repetition and instruction following",
+      "prompt": "Write an original inner monologue of 180–250 words. The narrator has promised to visit a lonely relative but wants to cancel in order to enjoy a free evening. Include a concrete detail from the narrator's surroundings, at least one self-justification, and a counterthought that challenges it. Avoid repeating the same idea in different words.",
+      "criteria": [
+        "Includes a concrete detail from the surroundings.",
+        "Shows a self-justification and a meaningful counterthought.",
+        "Maintains a coherent inner voice with limited redundant phrasing."
+      ],
+      "failure_conditions": [
+        "Omits the promise or the desire to cancel.",
+        "Fails to include both justification and counterthought.",
+        "Repeats the same emotional claim without meaningful development."
+      ]
+    }
+  ]
+}
