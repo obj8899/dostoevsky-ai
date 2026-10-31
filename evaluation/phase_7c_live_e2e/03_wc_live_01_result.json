@@ -1,0 +1,82 @@
+{
+  "test_id": "WC-LIVE-01",
+  "timestamp_utc": "2026-10-30T18:39:56.520997+00:00",
+  "request": {
+    "url": "http://localhost:8000/api/features/word-cabinet",
+    "method": "POST",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Origin": "http://localhost:5173"
+    },
+    "payload": {
+      "context": "I feel relieved that an important responsibility is finally over, but I also feel strangely empty. I expected happiness, yet I mostly feel exhausted and uncertain about what to do next.",
+      "count": 6
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "duration_seconds": 76.223,
+    "payload": {
+      "context": "I feel relieved that an important responsibility is finally over, but I also feel strangely empty. I expected happiness, yet I mostly feel exhausted and uncertain about what to do next.",
+      "words": [
+        {
+          "word": "sated",
+          "part_of_speech": "adjective",
+          "definition": "Feeling satisfied or relieved after a stressful situation has ended, though still uncertain about the future.",
+          "connotation": "Relieves you of worry but doesn't fill a void; it's like having a big meal that leaves you partly full and partly unsatisfied.",
+          "intensity": 2,
+          "distinction": "Better conveys both relief and emptiness compared to just 'relieved'.",
+          "example": "I felt sated after the project deadline, but I still had an uneasy feeling about my next steps in the company."
+        },
+        {
+          "word": "antipodal",
+          "part_of_speech": "adjective",
+          "definition": "Expressing a sense of duality or contrast, like being between two extremes.",
+          "connotation": "Feeling both relieved and empty; opposite feelings side by side rather than cancelling each other out.",
+          "intensity": 3,
+          "distinction": "Describes the polar opposite states without directly saying one is positive and the other negative, allowing for nuanced experience.",
+          "example": "After being relieved of a major responsibility, I felt antipodal; my soul was both elated and desolate."
+        },
+        {
+          "word": "euphoric",
+          "part_of_speech": "adjective",
+          "definition": "Feeling very happy or excited after something positive occurs.",
+          "connotation": "Contrasts the relieved feeling by emphasizing a strong, almost overwhelming joy compared to just relief; doesn't capture the lingering emptiness fully.",
+          "intensity": 1,
+          "distinction": "Focuses on happiness rather than simply relief, which can fit someone who feels both happy and empty about their situation.",
+          "example": "I was euphoric at having completed my project, but now I feel strangely empty."
+        },
+        {
+          "word": "anxious",
+          "part_of_speech": "adjective",
+          "definition": "Feeling worried or unsure about the future after a change in situation.",
+          "connotation": "Captures the sense of uncertainty and lack of direction, fitting someone who feels relieved but unsure where to go next.",
+          "intensity": 3,
+          "distinction": "Focuses specifically on the feeling of not knowing what to do after relief, which isn't as strongly expressed by 'sated' alone.",
+          "example": "Though relieved that my project was over, I'm anxious about finding a new direction for my career."
+        },
+        {
+          "word": "bereft",
+          "part_of_speech": "adjective",
+          "definition": "Feeling empty or lacking something after losing it; used here as relief from responsibility is leading to feeling less attached.",
+          "connotation": "Reflects a sense of loss, even if the loss was positive (releasing responsibility), which contributes to the feeling of emptiness.",
+          "intensity": 4,
+          "distinction": "Better conveys a sense of detachment from what just happened compared to 'antipodal' or just 'relieved'.",
+          "example": "Relieved that my job was over, I felt bereft of the daily structure and companionship it provided."
+        },
+        {
+          "word": "baffled",
+          "part_of_speech": "adjective",
+          "definition": "Feeling confused or unsure about what to do next after a change in situation.",
+          "connotation": "Captures not only uncertainty but also the cognitive dissonance of suddenly being free from an important responsibility and having no clear path forward.",
+          "intensity": 3,
+          "distinction": "More detailed than just 'anxious', focusing specifically on confusion about future actions.",
+          "example": "I felt baffled by my new situation; I was relieved to be finished with the project, but didn't know where to turn next."
+        }
+      ],
+      "model": "dostoevsky-baseline:latest",
+      "validation_warnings": []
+    }
+  }
+}

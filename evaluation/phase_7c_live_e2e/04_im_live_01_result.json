@@ -1,0 +1,35 @@
+{
+  "test_id": "IM-LIVE-01",
+  "timestamp_utc": "2026-10-30T18:41:32.715159+00:00",
+  "request": {
+    "url": "http://localhost:8000/api/features/inner-monologue",
+    "method": "POST",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Origin": "http://localhost:5173"
+    },
+    "payload": {
+      "scenario": "A young man has received an opportunity that could change his future. Everyone around him congratulates him, but he privately suspects that he is not capable of living up to their expectations. He feels proud, frightened and ashamed of his own fear.",
+      "perspective": "first_person",
+      "min_words": 180,
+      "max_words": 250
+    }
+  },
+  "response": {
+    "status_code": 200,
+    "duration_seconds": 24.963,
+    "payload": {
+      "scenario": "A young man has received an opportunity that could change his future. Everyone around him congratulates him, but he privately suspects that he is not capable of living up to their expectations. He feels proud, frightened and ashamed of his own fear.",
+      "generated_text": "I find myself caught in a web of conflicting emotions - pride for the prospect before me, yet fear at its very essence. Everyone around me seems so certain of what this means for my future, but I know that deep down, inside, it elicits an unease. I feel proud because they see something within me that they don't believe I possess. But at the same time, I am terrified by the implications; if I fail to live up to their expectations, would anyone even notice or care? The shame of my own inadequacy bubbles just beneath the surface. Yet, it's this very same feeling that keeps pushing me forward, driving me towards something more than what society deems possible for a boy like me. It is both a burden and an intoxicant - a desire to prove myself worthy, yet a fear at being found wanting.",
+      "word_count": 147,
+      "requested_min_words": 180,
+      "requested_max_words": 250,
+      "within_requested_range": false,
+      "model": "dostoevsky-baseline:latest",
+      "validation_warnings": [
+        "The response contains 147 whitespace-delimited words; the requested minimum is 180."
+      ]
+    }
+  }
+}

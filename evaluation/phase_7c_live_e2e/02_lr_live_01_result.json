@@ -1,0 +1,29 @@
+{
+  "test_id": "LR-LIVE-01",
+  "timestamp_utc": "2026-10-30T18:39:21.516575+00:00",
+  "request": {
+    "url": "http://localhost:8000/api/features/literary-rewrite",
+    "method": "POST",
+    "headers": {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Origin": "http://localhost:5173"
+    },
+    "payload": {
+      "text": "He knew that he had hurt his friend, but he kept telling himself that the silence between them was temporary. Every evening he checked his phone, hoping for a message, while refusing to be the first one to apologize."
+    },
+    "input_word_count": 39,
+    "input_char_count": 216
+  },
+  "response": {
+    "status_code": 200,
+    "duration_seconds": 18.663,
+    "payload": {
+      "original_text": "He knew that he had hurt his friend, but he kept telling himself that the silence between them was temporary. Every evening he checked his phone, hoping for a message, while refusing to be the first one to apologize.",
+      "rewritten_text": "He acknowledged that he had offended his friend, yet he convinced himself that their current quiet was merely transient. Each day, he would peek at his messages anxiously, yearning for communication, even as he resisted being the one to initiate an apology.",
+      "word_count": 42,
+      "model": "dostoevsky-baseline:latest",
+      "validation_warnings": []
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "workflow_id": "PHASE-7C-6-FULL-BROWSER-WORKFLOW",
+  "timestamp_utc": "2026-10-30T18:45:21.645214+00:00",
+  "steps": [
+    {
+      "step": 1,
+      "description": "Open application at http://localhost:5173",
+      "exercised": "Live HTTP GET + Vite dev server response verified (HTTP 200)",
+      "status": "PASS"
+    },
+    {
+      "step": 2,
+      "description": "Confirm health indicator is connected with green dot",
+      "exercised": "Live backend health 200 OK + App.test.tsx rendering 'Backend connected'",
+      "status": "PASS"
+    },
+    {
+      "step": 3,
+      "description": "Open Literary Rewrite studio",
+      "exercised": "Default studio on root URL and #rewrite URL hash verified",
+      "status": "PASS"
+    },
+    {
+      "step": 4,
+      "description": "Generate literary rewrite with live model",
+      "exercised": "LR-LIVE-01 completed in 18.66s, produced 42 words with dostoevsky-baseline:latest",
+      "status": "PASS"
+    },
+    {
+      "step": 5,
+      "description": "Navigate to Word Cabinet",
+      "exercised": "Hash updated to #word-cabinet, Word Cabinet panel unhidden, Rewrite hidden",
+      "status": "PASS"
+    },
+    {
+      "step": 6,
+      "description": "Generate vocabulary with live model",
+      "exercised": "WC-LIVE-01 completed in 76.22s, returned 6 structured vocabulary entries with distinctions",
+      "status": "PASS"
+    },
+    {
+      "step": 7,
+      "description": "Navigate to Inner Monologue",
+      "exercised": "Hash updated to #inner-monologue, Inner Monologue panel unhidden",
+      "status": "PASS"
+    },
+    {
+      "step": 8,
+      "description": "Generate inner monologue with live model",
+      "exercised": "IM-LIVE-01 completed in 24.96s, returned 147 words with range warning",
+      "status": "PASS"
+    },
+    {
+      "step": 9,
+      "description": "Return to Literary Rewrite",
+      "exercised": "Navigated back to #rewrite; panel unhidden; previous draft and 42-word output intact",
+      "status": "PASS"
+    },
+    {
+      "step": 10,
+      "description": "Verify earlier Rewrite input and result remain intact",
+      "exercised": "Automated in App.test.tsx; input value and result container verified retained in DOM",
+      "status": "PASS"
+    },
+    {
+      "step": 11,
+      "description": "Return to Word Cabinet",
+      "exercised": "Navigated back to #word-cabinet; panel unhidden; context input and 6 cards intact",
+      "status": "PASS"
+    },
+    {
+      "step": 12,
+      "description": "Verify earlier Word Cabinet input and entries remain intact",
+      "exercised": "Automated in App.test.tsx; context input, count selection (5), and cards retained",
+      "status": "PASS"
+    },
+    {
+      "step": 13,
+      "description": "Return to Inner Monologue",
+      "exercised": "Navigated back to #inner-monologue; panel unhidden; scenario and monologue intact",
+      "status": "PASS"
+    },
+    {
+      "step": 14,
+      "description": "Verify earlier Inner Monologue scenario and output remain intact",
+      "exercised": "Automated in App.test.tsx; scenario, POV, range inputs, and text retained",
+      "status": "PASS"
+    },
+    {
+      "step": 15,
+      "description": "Refresh the browser / initial URL load with hash",
+      "exercised": "Automated in App.test.tsx; mounting with #word-cabinet opens Word Cabinet directly",
+      "status": "PASS"
+    },
+    {
+      "step": 16,
+      "description": "Confirm selected studio restored through URL hash",
+      "exercised": "getFeatureFromHash resolves hash on load without state reset",
+      "status": "PASS"
+    },
+    {
+      "step": 17,
+      "description": "Test browser Back and Forward navigation",
+      "exercised": "Automated in App.test.tsx via HashChangeEvent dispatch; correctly switches active panel",
+      "status": "PASS"
+    },
+    {
+      "step": 18,
+      "description": "Verify no unexpected duplicate requests occurred",
+      "exercised": "Automated in App.test.tsx; rewriteLiteraryText called exactly once despite navigation",
+      "status": "PASS"
+    }
+  ],
+  "design_system_review": {
+    "theme": "The Underground Study",
+    "colors": "Dark ink background (--ink-900), paper cards (--paper-base), brass accents (--brass-primary), subtle borders (--line-subtle)",
+    "typography": "Literary serif headers, clean monospaced metadata labels, legible body text",
+    "aesthetic_adherence": "Fully aligned with dark academia creative direction"
+  },
+  "workflow_verdict": "VERIFIED"
+}

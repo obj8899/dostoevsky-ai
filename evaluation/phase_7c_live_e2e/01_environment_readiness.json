@@ -1,0 +1,81 @@
+{
+  "timestamp_utc": "2026-10-30T18:37:40.770192+00:00",
+  "git": {
+    "branch": "main",
+    "commit": "d5a0a1837a173b143f963830a53d7bcd5b5fdf09",
+    "dirty": true,
+    "modified_files": [
+      ".gitignore",
+      "README.md",
+      "backend/src/dostoevsky_ai/config.py",
+      "backend/tests/test_health.py",
+      "frontend/package.json",
+      "frontend/package-lock.json",
+      "frontend/vite.config.ts",
+      "frontend/src/App.tsx",
+      "frontend/src/components/AppShell.tsx",
+      "frontend/src/styles/global.css",
+      "frontend/src/api/client.ts",
+      "frontend/src/api/client.test.ts"
+    ]
+  },
+  "python_environment": {
+    "version": "3.13.5",
+    "fastapi": "0.162.0",
+    "pydantic": "2.14.1",
+    "httpx": "0.28.1"
+  },
+  "frontend_environment": {
+    "node": "v22.19.0",
+    "npm": "10.9.3",
+    "react": "18.3.1",
+    "vite": "8.3.5",
+    "vitest": "5.0.5",
+    "testing_library_react": "16.3.3",
+    "testing_library_jest_dom": "7.0.1",
+    "testing_library_user_event": "14.6.8",
+    "jsdom": "29.1.1"
+  },
+  "ollama": {
+    "reachable": true,
+    "base_url": "http://127.0.0.1:11434",
+    "serving_model": "dostoevsky-baseline:latest",
+    "digest": "c6fb3dc8d97a4e8c...",
+    "parent_model": "qwen2.5:3b",
+    "parameter_size": "3.1B",
+    "quantization_level": "Q4_K_M",
+    "parameters": {
+      "temperature": 0.85,
+      "top_p": 0.9,
+      "repeat_penalty": 1.1,
+      "num_ctx": 4096,
+      "num_predict": 512
+    }
+  },
+  "services": {
+    "backend": {
+      "url": "http://127.0.0.1:8000",
+      "health_endpoint": "http://127.0.0.1:8000/api/health",
+      "health_status_code": 200,
+      "health_payload": {
+        "status": "ok",
+        "ollama": {
+          "status": "connected",
+          "model": "dostoevsky-baseline:latest",
+          "model_available": true,
+          "error": null
+        }
+      }
+    },
+    "frontend": {
+      "url": "http://localhost:5173",
+      "status_code": 200,
+      "cors_origins_tested": [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173"
+      ],
+      "cors_status": "ALLOW_ORIGIN_VERIFIED"
+    }
+  },
+  "gate_7c1_verdict": "PASSED"
+}

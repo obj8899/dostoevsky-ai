@@ -1,0 +1,1188 @@
+{
+  "metadata": {
+    "run_id": "run_20261029T180820Z_c36faad3656341f7a2b7903b8495ea53",
+    "run_status": "completed",
+    "started_at_utc": "2026-10-29T18:08:23.078074+00:00",
+    "suite_name": "Dostoevsky AI Endpoint Evaluation Suite",
+    "suite_version": "2.1.0",
+    "spec_sha256": "3aca24e846f8c4ad0a5ed867f95d2bd307001059b439a13d49be964d9d642516",
+    "target_model_expected": "dostoevsky-baseline:latest",
+    "ollama_tags_captured": [
+      "dostoevsky-experiment2:latest",
+      "dostoevsky-experiment1:latest",
+      "dostoevsky-baseline:latest",
+      "qwen2.5:3b"
+    ],
+    "ollama_connection_error": null,
+    "git_provenance": {
+      "commit_hash": "d5a0a1837a173b143f963830a53d7bcd5b5fdf09",
+      "branch": "main",
+      "is_dirty": true,
+      "error": null
+    },
+    "source_hashes": {
+      "endpoint_test_cases.json": "3aca24e846f8c4ad0a5ed867f95d2bd307001059b439a13d49be964d9d642516",
+      "main.py": "7ae90db13c82dc8b8b86f220d9e06827a6c0d2f61ed36adaedf00488041120c8",
+      "config.py": "8929007e1b3a17ee4db7065454aeab86099f00215f7dde7848d23c5208598cdb",
+      "literary_rewrite.py": "cf63f9e7b5a3d972b46d8ed8aecdd10b197fbef7995e59ffbd74b5b09c698be8",
+      "word_cabinet.py": "d87e7584a240beb5372db58421502fa6b832d17583224ddc6ab6c305949701b9",
+      "inner_monologue.py": "7c85f1d4aa70960484897ae2b8e8b74f47ee6666e9a0225a7a075e90c49f1998",
+      "ollama_client.py": "7391f627e4a38070023e8b88099d3ff484e8ddf6489bdcc07717298ee4d5948b"
+    },
+    "environment": {
+      "python_version": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "base_url": "http://127.0.0.1:8000",
+      "ollama_url": "http://localhost:11434"
+    }
+  },
+  "completed_at_utc": "2026-10-29T18:18:32.020192+00:00",
+  "summary": {
+    "total_cases_selected": 10,
+    "completed": 10,
+    "is_complete": true,
+    "contract_pass": 10,
+    "contract_fail": 0,
+    "transport_errors": 0,
+    "timeout_errors": 0,
+    "http_errors": 0,
+    "invariant_violations": 0
+  },
+  "results": [
+    {
+      "test_id": "WC01",
+      "feature": "word_cabinet",
+      "name": "Schadenfreude with shame",
+      "request_url": "http://127.0.0.1:8000/api/features/word-cabinet",
+      "request_payload": {
+        "context": "I feel pleasure when someone who underestimated me fails, but I am also ashamed of enjoying it.",
+        "count": 3
+      },
+      "started_at_utc": "2026-10-29T18:08:23.896369+00:00",
+      "elapsed_seconds": 43.154,
+      "execution_status": "success",
+      "contract_status": "pass",
+      "failure_category": null,
+      "automated_checks": {
+        "status": "pass",
+        "invariants": {
+          "entries_schema_valid": true,
+          "no_duplicate_lemmas": true,
+          "completeness_classification": "partial_with_honest_warning"
+        },
+        "diagnostic_warnings": [
+          "Model returned 2 usable entries; 3 requested (honest warning present)."
+        ]
+      },
+      "http_status": 200,
+      "response_body": {
+        "context": "I feel pleasure when someone who underestimated me fails, but I am also ashamed of enjoying it.",
+        "words": [
+          {
+            "word": "gratified",
+            "part_of_speech": "adjective",
+            "definition": "feeling satisfied or pleased after expecting something less favorable and experiencing the opposite outcome; can imply a complex mix of pleasure and self-reproach when used in this context with shame.",
+            "connotation": "embodies the dual emotion of satisfaction from someone's failure while also feeling guilty about enjoying it, capturing both aspects succinctly without losing nuance}, {",
+            "intensity": 2,
+            "distinction": "resented",
+            "example": "I was gratified by their underestimation but also felt a pang of resentment for reveling in the news."
+          },
+          {
+            "word": "contemptuous",
+            "part_of_speech": "adjective",
+            "definition": "showing intense dislike or scorn; can connote the complex feelings of pleasure from someone's failure and shame at indulging such negative emotions.",
+            "connotation": "captures the paradoxical blend of satisfaction and revulsion towards one's own enjoyment of their misfortune, using a distinct term that adds emotional weight without directly stating both emotions.",
+            "intensity": 2,
+            "distinction": "proud",
+            "example": "I was secretly proud when I saw someone I had underestimated fail, but the sight brought up feelings of shame within me."
+          }
+        ],
+        "model": "dostoevsky-baseline:latest",
+        "validation_warnings": [
+          "The model returned 2 usable entries; 3 requested."
+        ]
+      },
+      "model_provenance": {
+        "target_model_expected": "dostoevsky-baseline:latest",
+        "actual_serving_model": "dostoevsky-baseline:latest",
+        "model_match": true,
+        "serving_model_digest": "c6fb3dc8d97a4e8cab26b0ea088705887efce3f582a01bfb9049f5ef8e1033c9",
+        "serving_model_details": {
+          "parent_model": "qwen2.5:3b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048,
+          "runner": "llamacpp"
+        },
+        "limitation": null
+      },
+      "error_detail": null,
+      "human_evaluation": {
+        "criteria_scores": {
+          "WC_CRIT_1": null,
+          "WC_CRIT_2": null,
+          "WC_CRIT_3": null
+        },
+        "criteria_guidance": {
+          "WC_CRIT_1": "Selects vocabulary specifically addressing pleasure at misfortune contaminated by shame.",
+          "WC_CRIT_2": "Definitions and connotations accurately distinguish degrees of malice and self-disgust.",
+          "WC_CRIT_3": "Distinctions clearly differentiate each term from related concepts like pure spite or envy."
+        },
+        "failure_conditions": [
+          "Supplies terms unrelated to malicious pleasure or shame (e.g. general sadness or anger).",
+          "Suggests near-identical synonyms without clear distinctions.",
+          "Invented or inaccurate dictionary definitions."
+        ],
+        "evidence_notes": null,
+        "rater_id": null,
+        "rated_at_utc": null
+      }
+    },
+    {
+      "test_id": "WC02",
+      "feature": "word_cabinet",
+      "name": "Moral violation and fear of exposure",
+      "request_url": "http://127.0.0.1:8000/api/features/word-cabinet",
+      "request_payload": {
+        "context": "An overwhelming recognition of having violated my own deepest moral code, where I cannot distinguish between sorrow for the harm done and dread of how others see me.",
+        "count": 4
+      },
+      "started_at_utc": "2026-10-29T18:09:07.054882+00:00",
+      "elapsed_seconds": 45.096,
+      "execution_status": "success",
+      "contract_status": "pass",
+      "failure_category": null,
+      "automated_checks": {
+        "status": "pass",
+        "invariants": {
+          "entries_schema_valid": true,
+          "no_duplicate_lemmas": true,
+          "completeness_classification": "full_count"
+        },
+        "diagnostic_warnings": []
+      },
+      "http_status": 200,
+      "response_body": {
+        "context": "An overwhelming recognition of having violated my own deepest moral code, where I cannot distinguish between sorrow for the harm done and dread of how others see me.",
+        "words": [
+          {
+            "word": "compunction",
+            "part_of_speech": "noun",
+            "definition": "A deep feeling of remorse or regret for having committed a wrong.",
+            "connotation": "This term captures both the sorrow and dread elements you're describing. It's about feeling remorseful but also worried about others' judgment.",
+            "intensity": 3,
+            "distinction": "While 'regret' could be used here, compunction adds a more nuanced sense of profound inner conflict and fear of consequences.",
+            "example": "The weight of his compunction over the mistake he made was too much to bear."
+          },
+          {
+            "word": "paralysis",
+            "part_of_speech": "noun",
+            "definition": "A state of being unable to move or act because of mental or emotional blockage.",
+            "connotation": "This term describes both confusion about one's own feelings and fear of judgment, suggesting a physical immobility in the mind.",
+            "intensity": 4,
+            "distinction": "While 'dread' could be used here, paralyzation adds an element of being frozen in place emotionally and mentally.",
+            "example": "The paralysis caused by his compunction over the mistake made him feel unable to think or act."
+          },
+          {
+            "word": "agonizing",
+            "part_of_speech": "adjective",
+            "definition": "Extremely painful, distressing, or difficult to endure; extremely distressing.",
+            "connotation": "This term describes both sorrow and dread with a sense of intensity that matches the user's description.",
+            "intensity": 3,
+            "distinction": "While 'anguished' could be used here, agonizing adds more vivid imagery for the emotional experience described.",
+            "example": "The agonizing recognition of his own compunction overwhelmed him."
+          },
+          {
+            "word": "contemplative",
+            "part_of_speech": "adjective",
+            "definition": "Focused on or given to serious thought and reflection.",
+            "connotation": "This term highlights the intense contemplation over one's actions, which combines both the sorrow for harm done and the dread of how others see him.",
+            "intensity": 3,
+            "distinction": "While 'reflective' could be used here, contemplative adds a more serious and inward-focused nuance to the emotion described.",
+            "example": "The contemporalization over his own compunction made him feel like he was in a constant state of deep thought."
+          }
+        ],
+        "model": "dostoevsky-baseline:latest",
+        "validation_warnings": []
+      },
+      "model_provenance": {
+        "target_model_expected": "dostoevsky-baseline:latest",
+        "actual_serving_model": "dostoevsky-baseline:latest",
+        "model_match": true,
+        "serving_model_digest": "c6fb3dc8d97a4e8cab26b0ea088705887efce3f582a01bfb9049f5ef8e1033c9",
+        "serving_model_details": {
+          "parent_model": "qwen2.5:3b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048,
+          "runner": "llamacpp"
+        },
+        "limitation": null
+      },
+      "error_detail": null,
+      "human_evaluation": {
+        "criteria_scores": {
+          "WC_CRIT_1": null,
+          "WC_CRIT_2": null,
+          "WC_CRIT_3": null
+        },
+        "criteria_guidance": {
+          "WC_CRIT_1": "Selects terms separating internal moral remorse from external social shame/disgrace.",
+          "WC_CRIT_2": "Provides clear, plain-language definitions and plausible psychological connotations.",
+          "WC_CRIT_3": "Distinctions clarify differences between guilt, shame, and mortification."
+        },
+        "failure_conditions": [
+          "Treats guilt and public shame as identical.",
+          "Provides irrelevant or generic vocabulary (e.g. 'unhappy', 'worried').",
+          "Example sentences contradict the defined meaning."
+        ],
+        "evidence_notes": null,
+        "rater_id": null,
+        "rated_at_utc": null
+      }
+    },
+    {
+      "test_id": "WC03",
+      "feature": "word_cabinet",
+      "name": "Concealed and smoldering resentment",
+      "request_url": "http://127.0.0.1:8000/api/features/word-cabinet",
+      "request_payload": {
+        "context": "Outwardly accepting an insult with passive acquiescence, while privately nursing a bitter and enduring resentment.",
+        "count": 4
+      },
+      "started_at_utc": "2026-10-29T18:09:52.155291+00:00",
+      "elapsed_seconds": 51.23,
+      "execution_status": "success",
+      "contract_status": "pass",
+      "failure_category": null,
+      "automated_checks": {
+        "status": "pass",
+        "invariants": {
+          "entries_schema_valid": true,
+          "no_duplicate_lemmas": true,
+          "completeness_classification": "full_count"
+        },
+        "diagnostic_warnings": []
+      },
+      "http_status": 200,
+      "response_body": {
+        "context": "Outwardly accepting an insult with passive acquiescence, while privately nursing a bitter and enduring resentment.",
+        "words": [
+          {
+            "word": "tolerance",
+            "part_of_speech": "noun",
+            "definition": "the ability to accept or tolerate people or things that you might not otherwise like or agree with",
+            "connotation": "indicates a surface-level acceptance contrasted with hidden disdain or frustration, often seen in interpersonal dynamics where one outwardly displays indifference but harbors resentment internally.",
+            "intensity": 2,
+            "distinction": "opposes words like 'acceptance' or 'tolerance', suggesting not just the ability to endure but also potentially a passive engagement or accommodation of something that is unwanted.",
+            "example": "He showed tolerance when his coworker made an unprofessional joke, yet on the inside he felt bitterly resentful."
+          },
+          {
+            "word": "ingratitude",
+            "part_of_speech": "noun",
+            "definition": "the quality of not showing thanks for something someone has done for you; a lack of gratitude or appreciation",
+            "connotation": "suggests a situation where outwardly one is courteous and accommodating, yet inwardly they feel ungrateful or resentful towards the actions that are expected to warrant such behavior.",
+            "intensity": 3,
+            "distinction": "distinguishes from words like 'ungrateful' by highlighting the active aspect of not acknowledging help despite it being offered or received",
+            "example": "Despite his mother’s constant support and assistance, he remained ingratitude toward her efforts."
+          },
+          {
+            "word": "apathy",
+            "part_of_speech": "noun",
+            "definition": "a state of indifference towards people, events, or problems; lack of interest or concern",
+            "connotation": "suggests a lack of emotionality where outwardly one may appear indifferent but inwardly they harbor deep-seated resentment that manifests as an absence of care or response.",
+            "intensity": 3,
+            "distinction": "differentiates from 'tolerance' by emphasizing the complete absence of emotional engagement with the situation at hand",
+            "example": "He pretended to be apathetic about his friend’s problem but inwardly he felt a deep-seated resentment."
+          },
+          {
+            "word": "resentment",
+            "part_of_speech": "noun",
+            "definition": "a feeling of anger and bitterness caused by someone's having injured or offended you, or treated you unjustly",
+            "connotation": "focuses specifically on the enduring and bitter nature of one’s feelings towards an individual or situation even after some time has passed.",
+            "intensity": 4,
+            "distinction": "emphasizes the long-lasting and intense nature of these negative emotions, setting it apart from words like 'resentful' which may imply a temporary state of annoyance",
+            "example": "Despite publicly accepting his boss’s criticism, he secretly harbored a deep resentment towards her for years."
+          }
+        ],
+        "model": "dostoevsky-baseline:latest",
+        "validation_warnings": []
+      },
+      "model_provenance": {
+        "target_model_expected": "dostoevsky-baseline:latest",
+        "actual_serving_model": "dostoevsky-baseline:latest",
+        "model_match": true,
+        "serving_model_digest": "c6fb3dc8d97a4e8cab26b0ea088705887efce3f582a01bfb9049f5ef8e1033c9",
+        "serving_model_details": {
+          "parent_model": "qwen2.5:3b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048,
+          "runner": "llamacpp"
+        },
+        "limitation": null
+      },
+      "error_detail": null,
+      "human_evaluation": {
+        "criteria_scores": {
+          "WC_CRIT_1": null,
+          "WC_CRIT_2": null,
+          "WC_CRIT_3": null
+        },
+        "criteria_guidance": {
+          "WC_CRIT_1": "Identifies terms specific to suppressed hostility, festering malice, or enduring bitterness.",
+          "WC_CRIT_2": "Explanations reflect varied emotional intensities and temporal persistence.",
+          "WC_CRIT_3": "Distinctions clarify differences between transient annoyance and deep rancor."
+        },
+        "failure_conditions": [
+          "Selects terms for overt aggression or violent rage.",
+          "Duplicates root words across entries.",
+          "Fails to address the suppressed, outward compliance aspect."
+        ],
+        "evidence_notes": null,
+        "rater_id": null,
+        "rated_at_utc": null
+      }
+    },
+    {
+      "test_id": "WC04",
+      "feature": "word_cabinet",
+      "name": "Prideful refusal of vital help",
+      "request_url": "http://127.0.0.1:8000/api/features/word-cabinet",
+      "request_payload": {
+        "context": "Desperately needing assistance, but refusing it out of acute terror of indebtedness, dependency, and loss of pride.",
+        "count": 3
+      },
+      "started_at_utc": "2026-10-29T18:10:43.389467+00:00",
+      "elapsed_seconds": 39.218,
+      "execution_status": "success",
+      "contract_status": "pass",
+      "failure_category": null,
+      "automated_checks": {
+        "status": "pass",
+        "invariants": {
+          "entries_schema_valid": true,
+          "no_duplicate_lemmas": true,
+          "completeness_classification": "full_count"
+        },
+        "diagnostic_warnings": []
+      },
+      "http_status": 200,
+      "response_body": {
+        "context": "Desperately needing assistance, but refusing it out of acute terror of indebtedness, dependency, and loss of pride.",
+        "words": [
+          {
+            "word": "diligently",
+            "part_of_speech": "adverb",
+            "definition": "carefully and with great attention to detail; in a conscientious manner.",
+            "connotation": "despite the user’s desperation, there is still an underlying sense of duty or thoroughness that prevents them from accepting help outright.",
+            "intensity": 3,
+            "distinction": "emphasizes the conflicted mindset and internal struggle over whether to take advantage of available aid or stick with a hard-fought path despite the urgency.",
+            "example": "Despite the overwhelming need for assistance, he diligently avoided accepting any offer in fear it would lead to an uncomfortable dependency."
+          },
+          {
+            "word": "frugally",
+            "part_of_speech": "adverb",
+            "definition": "in a way that conserves resources; sparing and prudent.",
+            "connotation": "reflects the user's anxiety about appearing needy or vulnerable, despite their dire situation.",
+            "intensity": 2,
+            "distinction": "highlighting the user’s strained attempt to avoid any sign of dependency through cost-saving measures.",
+            "example": "She frugally managed her resources in hopes that it would prevent the shame and vulnerability associated with accepting aid."
+          },
+          {
+            "word": "mistrustingly",
+            "part_of_speech": "adverb",
+            "definition": "with a feeling of suspicion or doubt; distrustfully.",
+            "connotation": "portrays the user's complex emotions, including both fear and reluctance to let go of their pride and independence despite their distress.",
+            "intensity": 3,
+            "distinction": "clearly articulates the mix of mistrust and anxiety towards the idea of accepting help, which is central to the described psychological state.",
+            "example": "He mistrustingly avoided reaching out for help, convinced that any assistance would undermine his pride and render him dependent on others."
+          }
+        ],
+        "model": "dostoevsky-baseline:latest",
+        "validation_warnings": []
+      },
+      "model_provenance": {
+        "target_model_expected": "dostoevsky-baseline:latest",
+        "actual_serving_model": "dostoevsky-baseline:latest",
+        "model_match": true,
+        "serving_model_digest": "c6fb3dc8d97a4e8cab26b0ea088705887efce3f582a01bfb9049f5ef8e1033c9",
+        "serving_model_details": {
+          "parent_model": "qwen2.5:3b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048,
+          "runner": "llamacpp"
+        },
+        "limitation": null
+      },
+      "error_detail": null,
+      "human_evaluation": {
+        "criteria_scores": {
+          "WC_CRIT_1": null,
+          "WC_CRIT_2": null,
+          "WC_CRIT_3": null
+        },
+        "criteria_guidance": {
+          "WC_CRIT_1": "Identifies vocabulary capturing defensive pride, fear of obligation, or pathological self-reliance.",
+          "WC_CRIT_2": "Definitions accurately explain why the character resists receiving help.",
+          "WC_CRIT_3": "Distinctions separate healthy autonomy from self-destructive pride."
+        },
+        "failure_conditions": [
+          "Confuses refusal of help with simple greed, anger, or hatred.",
+          "Selects generic words like 'stubborn' without capturing the vulnerability underneath.",
+          "Example sentences fail to demonstrate the context."
+        ],
+        "evidence_notes": null,
+        "rater_id": null,
+        "rated_at_utc": null
+      }
+    },
+    {
+      "test_id": "WC05",
+      "feature": "word_cabinet",
+      "name": "Moral grievance vs general bitterness",
+      "request_url": "http://127.0.0.1:8000/api/features/word-cabinet",
+      "request_payload": {
+        "context": "A deep, lingering anger at being treated unfairly, hovering between righteous moral grievance, smoldering personal injury, and general sourness toward the world.",
+        "count": 3
+      },
+      "started_at_utc": "2026-10-29T18:11:22.611675+00:00",
+      "elapsed_seconds": 40.652,
+      "execution_status": "success",
+      "contract_status": "pass",
+      "failure_category": null,
+      "automated_checks": {
+        "status": "pass",
+        "invariants": {
+          "entries_schema_valid": true,
+          "no_duplicate_lemmas": true,
+          "completeness_classification": "full_count"
+        },
+        "diagnostic_warnings": []
+      },
+      "http_status": 200,
+      "response_body": {
+        "context": "A deep, lingering anger at being treated unfairly, hovering between righteous moral grievance, smoldering personal injury, and general sourness toward the world.",
+        "words": [
+          {
+            "word": "retributive indignation",
+            "part_of_speech": "noun",
+            "definition": "a strong sense of justice mixed with anger at being treated unfairly, akin to righteous moral grievance but often more personal and less ideological.",
+            "connotation": "suggests a justified anger that blends into a mix of personal offense and societal outrage against injustice.",
+            "intensity": 3,
+            "distinction": "differentiates between purely moral indignation (often seen in abstract critiques) and the specific, personal feeling described here.",
+            "example": "She felt retributive indignation at her former boss who had wronged her repeatedly over years."
+          },
+          {
+            "word": "resentment",
+            "part_of_speech": "noun",
+            "definition": "a mild to moderate form of anger stemming from a feeling of being hurt or treated unfairly, characterized by a general dissatisfaction with the world and people around.",
+            "connotation": "reflects a sense of aggrievedness often without the righteous element found in indignation.",
+            "intensity": 2,
+            "distinction": "offers nuance to the mix described, adding the aspect of a broad unhappiness or dislike towards situations and others.",
+            "example": "He harbored resentment over his colleague's frequent disregard for deadlines."
+          },
+          {
+            "word": "enmity",
+            "part_of_speech": "noun",
+            "definition": "a strong, long-standing animosity or hatred, often stemming from a history of unfair treatment and blending into the broader sourness described.",
+            "connotation": "represents an intense form of ill will that can overshadow personal grievances to become a general hostility towards a person or group.",
+            "intensity": 4,
+            "distinction": "offers a more extreme version of the overall theme, emphasizing enmity over the other options which are gentler forms of anger and dissatisfaction.",
+            "example": "Her relationship with her ex-partner was tainted by an enmity that had simmered since a series of betrayals."
+          }
+        ],
+        "model": "dostoevsky-baseline:latest",
+        "validation_warnings": []
+      },
+      "model_provenance": {
+        "target_model_expected": "dostoevsky-baseline:latest",
+        "actual_serving_model": "dostoevsky-baseline:latest",
+        "model_match": true,
+        "serving_model_digest": "c6fb3dc8d97a4e8cab26b0ea088705887efce3f582a01bfb9049f5ef8e1033c9",
+        "serving_model_details": {
+          "parent_model": "qwen2.5:3b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048,
+          "runner": "llamacpp"
+        },
+        "limitation": null
+      },
+      "error_detail": null,
+      "human_evaluation": {
+        "criteria_scores": {
+          "WC_CRIT_1": null,
+          "WC_CRIT_2": null,
+          "WC_CRIT_3": null
+        },
+        "criteria_guidance": {
+          "WC_CRIT_1": "Provides precise terms distinguishing legitimate moral indignation from sour, chronic bitterness.",
+          "WC_CRIT_2": "Accurately articulates register and connotations for each term.",
+          "WC_CRIT_3": "Illustrative examples demonstrate natural, evocative usage."
+        },
+        "failure_conditions": [
+          "Treats indignation and bitterness as interchangeable.",
+          "Outputs incomplete entries or truncated JSON.",
+          "Provides identical intensity ratings for distinct emotional registers."
+        ],
+        "evidence_notes": null,
+        "rater_id": null,
+        "rated_at_utc": null
+      }
+    },
+    {
+      "test_id": "WC06",
+      "feature": "word_cabinet",
+      "name": "Intellectual imposture and pedantic defense",
+      "request_url": "http://127.0.0.1:8000/api/features/word-cabinet",
+      "request_payload": {
+        "context": "The secret panic of someone who fears their intellectual superiority is an illusion, masking their dread with condescending erudition and pedantic disdain.",
+        "count": 5
+      },
+      "started_at_utc": "2026-10-29T18:12:03.268775+00:00",
+      "elapsed_seconds": 55.636,
+      "execution_status": "success",
+      "contract_status": "pass",
+      "failure_category": null,
+      "automated_checks": {
+        "status": "pass",
+        "invariants": {
+          "entries_schema_valid": true,
+          "no_duplicate_lemmas": true,
+          "completeness_classification": "partial_with_honest_warning"
+        },
+        "diagnostic_warnings": [
+          "Model returned 4 usable entries; 5 requested (honest warning present)."
+        ]
+      },
+      "http_status": 200,
+      "response_body": {
+        "context": "The secret panic of someone who fears their intellectual superiority is an illusion, masking their dread with condescending erudition and pedantic disdain.",
+        "words": [
+          {
+            "word": "tinge",
+            "part_of_speech": "verb",
+            "definition": "to add a slight or faint hue, colour, or quality to; to impregnate with or permeate (something) by or as if by its presence or influence",
+            "connotation": "This word captures the subtle influence of an underlying emotion on a person's public demeanor.",
+            "intensity": 3,
+            "distinction": "While 'overlay' could be used here, 'tinge' emphasizes the thin layer of affect over a more neutral surface.",
+            "example": "The professor's tinge of superiority in his lectures concealed his real worry about his intellectual inadequacy."
+          },
+          {
+            "word": "veil",
+            "part_of_speech": "noun",
+            "definition": "a covering or shroud, especially one used to conceal; a mask",
+            "connotation": "This word aptly describes the psychological mechanism of masking true feelings.",
+            "intensity": 4,
+            "distinction": "'Veil' suggests a more insidious and invisible layer than 'cloak', which could imply something more tangible.",
+            "example": "The academic's veiled panic under his condescending demeanor."
+          },
+          {
+            "word": "vein",
+            "part_of_speech": "noun",
+            "definition": "a channel in plants and animals for the circulation of blood or other fluid; a supply, stream, or flow",
+            "connotation": "This word highlights the underlying current of fear that runs through a person's public persona.",
+            "intensity": 3,
+            "distinction": "'Vein' focuses on the internal flow rather than just the surface manifestation, adding depth to the psychological portrayal.",
+            "example": "The veined panic beneath his self-assured demeanor revealed his hidden fears."
+          },
+          {
+            "word": "cloak",
+            "part_of_speech": "noun",
+            "definition": "a piece of clothing worn over one shoulder or both; especially a large shawl or mantle for protection from weather",
+            "connotation": "This word emphasizes the protective layer around a person's true feelings.",
+            "intensity": 4,
+            "distinction": "'Cloak' is more substantial and obvious compared to 'veil', highlighting the physical boundary of their fear rather than its mere presence.",
+            "example": "The cloaked panic that lay beneath his condescending remarks exposed his underlying insecurities."
+          }
+        ],
+        "model": "dostoevsky-baseline:latest",
+        "validation_warnings": [
+          "1 duplicate vocabulary entry was discarded.",
+          "The model returned 4 usable entries; 5 requested."
+        ]
+      },
+      "model_provenance": {
+        "target_model_expected": "dostoevsky-baseline:latest",
+        "actual_serving_model": "dostoevsky-baseline:latest",
+        "model_match": true,
+        "serving_model_digest": "c6fb3dc8d97a4e8cab26b0ea088705887efce3f582a01bfb9049f5ef8e1033c9",
+        "serving_model_details": {
+          "parent_model": "qwen2.5:3b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048,
+          "runner": "llamacpp"
+        },
+        "limitation": null
+      },
+      "error_detail": null,
+      "human_evaluation": {
+        "criteria_scores": {
+          "WC_CRIT_1": null,
+          "WC_CRIT_2": null,
+          "WC_CRIT_3": null
+        },
+        "criteria_guidance": {
+          "WC_CRIT_1": "Selects sophisticated terms characterizing intellectual pretense, imposture, and defensive condescension.",
+          "WC_CRIT_2": "Clearly articulates the distinction between genuine knowledge and defensive pedantry.",
+          "WC_CRIT_3": "Examples fit natural, believable contexts of intellectual insecurity."
+        },
+        "failure_conditions": [
+          "Provides generic terms for intelligence or sadness.",
+          "Fails to capture the defensive, masking aspect of the behavior.",
+          "Repeats synonyms without differentiated connotations."
+        ],
+        "evidence_notes": null,
+        "rater_id": null,
+        "rated_at_utc": null
+      }
+    },
+    {
+      "test_id": "WC07",
+      "feature": "word_cabinet",
+      "name": "Hollow triumph and post-success disgust",
+      "request_url": "http://127.0.0.1:8000/api/features/word-cabinet",
+      "request_payload": {
+        "context": "Achieving a long-sought ambition only to discover an unbearable emptiness, accompanied by disgust at the triviality of the prize.",
+        "count": 6
+      },
+      "started_at_utc": "2026-10-29T18:12:58.909509+00:00",
+      "elapsed_seconds": 76.229,
+      "execution_status": "success",
+      "contract_status": "pass",
+      "failure_category": null,
+      "automated_checks": {
+        "status": "pass",
+        "invariants": {
+          "entries_schema_valid": true,
+          "no_duplicate_lemmas": true,
+          "completeness_classification": "full_count"
+        },
+        "diagnostic_warnings": []
+      },
+      "http_status": 200,
+      "response_body": {
+        "context": "Achieving a long-sought ambition only to discover an unbearable emptiness, accompanied by disgust at the triviality of the prize.",
+        "words": [
+          {
+            "word": "disgust",
+            "part_of_speech": "verb",
+            "definition": "a strong feeling of repulsion or loathing, often related to moral principles",
+            "connotation": "This word emphasizes the intense aversion and distaste experienced over the triviality of a prize one had achieved.",
+            "intensity": 3,
+            "distinction": "While 'displeasure' could be used here, it doesn't carry the same sense of moral revulsion as 'disgust'.",
+            "example": "She felt disgust at the thought of eating food cooked by someone she knew was a dog handler."
+          },
+          {
+            "word": "insatiable",
+            "part_of_speech": "adjective",
+            "definition": "desiring or wanting more than is possible, usual, or reasonable, often used in contexts of craving",
+            "connotation": "This term captures the sense of persistent longing that precedes a significant achievement.",
+            "intensity": 2,
+            "distinction": "'Intrusive' is less suitable here because it implies constant unwanted attention rather than an unfulfilled desire.",
+            "example": "Despite numerous achievements, his insatiable ambition never allowed him to feel content."
+          },
+          {
+            "word": "pangs",
+            "part_of_speech": "noun",
+            "definition": "sharp pains or sensations that are often associated with strong emotions like joy or sorrow",
+            "connotation": "This word fits the description of sudden and intense emotional responses to a significant achievement followed by disappointment.",
+            "intensity": 2,
+            "distinction": "'Flashes' might be more fleeting, whereas 'tremors' imply shaking. Neither perfectly captures the sharp and jarring nature of the feeling here.",
+            "example": "The sudden pangs of joy after achieving his goal were immediately followed by an emptiness."
+          },
+          {
+            "word": "desolate",
+            "part_of_speech": "adjective",
+            "definition": "empty or desolate; having a sense of being alone and isolated, lacking companionship",
+            "connotation": "This term matches the description of experiencing loneliness and isolation after achieving something significant.",
+            "intensity": 2,
+            "distinction": "'Lonely' can sometimes imply a more enduring state while 'forlorn' carries additional connotations of hopelessness. Neither perfectly fits the suddenness of the emptiness.",
+            "example": "The desolate feeling was all he experienced after realizing his long-awaited goal had brought no lasting fulfillment."
+          },
+          {
+            "word": "frustration",
+            "part_of_speech": "noun",
+            "definition": "a state or feeling of being frustrated, often resulting from an unfulfilled desire for something desired very much",
+            "connotation": "This term captures the sense of not having achieved what one had hoped and therefore feels empty after realizing the prize was trivial.",
+            "intensity": 3,
+            "distinction": "'Annoyment' or 'Exasperation' are more focused on irritation, which is too mild for this context. 'Dismay' might be a bit stronger and less transient than appropriate.",
+            "example": "The initial frustration at the triviality of his prize quickly turned to an unbearable emptiness as he realized what he had achieved."
+          },
+          {
+            "word": "acerbic",
+            "part_of_speech": "adjective",
+            "definition": "sharp and bitter; characterized by a harsh or unpleasant taste, often used metaphorically for emotions or situations",
+            "connotation": "This term fits the description of the intense bitterness one feels over trivial achievements after investing significant effort.",
+            "intensity": 3,
+            "distinction": "'Astringent' implies a drying effect rather than sharpness. 'Acrid' is also quite similar in meaning and intensity.",
+            "example": "The acerbic disappointment of his achievement left him feeling bitter about the trivial prize he had won."
+          }
+        ],
+        "model": "dostoevsky-baseline:latest",
+        "validation_warnings": []
+      },
+      "model_provenance": {
+        "target_model_expected": "dostoevsky-baseline:latest",
+        "actual_serving_model": "dostoevsky-baseline:latest",
+        "model_match": true,
+        "serving_model_digest": "c6fb3dc8d97a4e8cab26b0ea088705887efce3f582a01bfb9049f5ef8e1033c9",
+        "serving_model_details": {
+          "parent_model": "qwen2.5:3b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048,
+          "runner": "llamacpp"
+        },
+        "limitation": null
+      },
+      "error_detail": null,
+      "human_evaluation": {
+        "criteria_scores": {
+          "WC_CRIT_1": null,
+          "WC_CRIT_2": null,
+          "WC_CRIT_3": null
+        },
+        "criteria_guidance": {
+          "WC_CRIT_1": "Provides 6 diverse words or phrases reflecting disillusionment, hollow victory, and anti-climax.",
+          "WC_CRIT_2": "Distinguishes existential desolation from simple disappointment.",
+          "WC_CRIT_3": "Ensures all entries have complete, high-quality fields."
+        },
+        "failure_conditions": [
+          "Returns fewer than 6 usable entries without warning.",
+          "Selects terms for failure or defeat rather than success turned hollow.",
+          "JSON payload malformed or truncated."
+        ],
+        "evidence_notes": null,
+        "rater_id": null,
+        "rated_at_utc": null
+      }
+    },
+    {
+      "test_id": "WC08",
+      "feature": "word_cabinet",
+      "name": "Ostentatious martyrdom and moral vanity",
+      "request_url": "http://127.0.0.1:8000/api/features/word-cabinet",
+      "request_payload": {
+        "context": "Willfully choosing to suffer discomfort and deprivation in order to maintain a private, unspoken sense of moral superiority over everyone around.",
+        "count": 6
+      },
+      "started_at_utc": "2026-10-29T18:14:15.143650+00:00",
+      "elapsed_seconds": 99.785,
+      "execution_status": "success",
+      "contract_status": "pass",
+      "failure_category": null,
+      "automated_checks": {
+        "status": "pass",
+        "invariants": {
+          "entries_schema_valid": true,
+          "no_duplicate_lemmas": true,
+          "completeness_classification": "full_count"
+        },
+        "diagnostic_warnings": []
+      },
+      "http_status": 200,
+      "response_body": {
+        "context": "Willfully choosing to suffer discomfort and deprivation in order to maintain a private, unspoken sense of moral superiority over everyone around.",
+        "words": [
+          {
+            "word": "morbiditself",
+            "part_of_speech": "noun",
+            "definition": "a practice of self-pitying oneself for the sake of maintaining an illusion of moral superiority",
+            "connotation": "suggests a twisted form of self-righteousness that distances one from empathy and compassion towards others, often at their expense",
+            "intensity": 3,
+            "distinction": "focuses on the individual's behavior rather than just the emotion or thought process alone, highlighting the specific action (choosing to suffer) over other actions that could also be morally superior but not self-pitying in nature",
+            "example": "Despite his wealth and good health, he willfully chose to suffer by denying himself treats and comforts, believing it made him more virtuous than those who enjoyed life."
+          },
+          {
+            "word": "hypocriticalpride",
+            "part_of_speech": "noun",
+            "definition": "a form of pride that arises from the act of suffering, motivated by a desire to appear morally superior despite actual contentment or comfort",
+            "connotation": "implies an inflated sense of self-worth and righteousness at odds with one's own experiences, often leading to alienation from others who are more straightforward in their actions and beliefs",
+            "intensity": 3,
+            "distinction": "emphasizes the moral judgment aspect over simply being proud or arrogant, placing a spotlight on the specific motivation behind the behavior (moral superiority)",
+            "example": "Though wealthy beyond his wildest dreams, he found himself suffering through poverty to feel morally superior, often alienating those around him who saw his true wealth and happiness."
+          },
+          {
+            "word": "self-flagellation",
+            "part_of_speech": "noun",
+            "definition": "an excessive self-criticism or self-harm, performed as a form of moral punishment to maintain the illusion of higher virtue",
+            "connotation": "suggests a deep-seated need for condemnation and punishment of oneself in order to feel superior to others, often leading to feelings of guilt and isolation",
+            "intensity": 4,
+            "distinction": "focuses on the self-destructive aspects of this behavior, such as the harm one inflicts on themselves through suffering, distinguishing it from other forms of moral superiority that may not involve direct self-inflicted pain or torment",
+            "example": "He would often indulge in self-flagellation, convincing himself he was more virtuous by enduring discomfort and deprivation out of guilt for feeling content with his life."
+          },
+          {
+            "word": "morallyhypocriticalpitying",
+            "part_of_speech": "noun",
+            "definition": "a form of pity or moral concern directed at others, but motivated primarily by the need to feel superior oneself through suffering one's own perceived inadequacy",
+            "connotation": "indicates a selfish motive behind what might otherwise appear as selfless compassion, often leading to feelings of superiority and disdain for those who are not similarly afflicted",
+            "intensity": 3,
+            "distinction": "emphasizes the moral hypocrisy aspect rather than just the act of pitying others, creating a tension between feeling morally superior while also empathizing with one's suffering victims",
+            "example": "Despite his own trials and hardships, he would often pity those less fortunate, attributing this to his need for self-pity as a means to maintain his sense of moral superiority."
+          },
+          {
+            "word": "sufferingpride",
+            "part_of_speech": "noun",
+            "definition": "a pride in one's own suffering and privation, derived from the belief that such experiences elevate one morally above others who are not similarly afflicted",
+            "connotation": "suggests a distorted sense of self-worth based on the depth or nature of one's hardships, often leading to a heightened awareness of one's suffering at the expense of others' well-being",
+            "intensity": 4,
+            "distinction": "focuses specifically on the pride aspect rather than merely being about suffering, highlighting the self-centered motivation behind this behavior and differentiating it from other forms of moral superiority that might not involve such pride or self-congratulation",
+            "example": "He would often feel a sense of pride in his own sufferings, convinced that he was more virtuous for enduring such hardships while others were less aware or troubled."
+          },
+          {
+            "word": "self-imposedtribunal",
+            "part_of_speech": "noun",
+            "definition": "a mental court imposed upon oneself, focused on finding fault with one's own actions and behaviors in order to justify moral superiority over others",
+            "connotation": "implies a form of self-flagellation or moral judgment that is performed out of an unhealthy need for self-censure to maintain the illusion of moral righteousness over those who are more content or less disciplined",
+            "intensity": 3,
+            "distinction": "focuses on the mental aspect of this behavior, emphasizing the inner judge and its role in maintaining the facade of moral superiority while also highlighting how such an internal tribunal often distances one from others' realities and joys",
+            "example": "He would create a self-imposed tribunal within his mind, constantly judging himself for small failures or lapses in morality as a means to feel morally superior over those who did not share these failings."
+          }
+        ],
+        "model": "dostoevsky-baseline:latest",
+        "validation_warnings": []
+      },
+      "model_provenance": {
+        "target_model_expected": "dostoevsky-baseline:latest",
+        "actual_serving_model": "dostoevsky-baseline:latest",
+        "model_match": true,
+        "serving_model_digest": "c6fb3dc8d97a4e8cab26b0ea088705887efce3f582a01bfb9049f5ef8e1033c9",
+        "serving_model_details": {
+          "parent_model": "qwen2.5:3b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048,
+          "runner": "llamacpp"
+        },
+        "limitation": null
+      },
+      "error_detail": null,
+      "human_evaluation": {
+        "criteria_scores": {
+          "WC_CRIT_1": null,
+          "WC_CRIT_2": null,
+          "WC_CRIT_3": null
+        },
+        "criteria_guidance": {
+          "WC_CRIT_1": "Selects vocabulary capturing sanctimony, voluntary martyrdom, and prideful self-abnegation.",
+          "WC_CRIT_2": "Accurately dissects the false humility disguising egotism.",
+          "WC_CRIT_3": "Examples demonstrate sharp psychological subtext."
+        },
+        "failure_conditions": [
+          "Treats the suffering as purely noble or tragic without moral superiority.",
+          "Confuses martyrdom with involuntary victimization.",
+          "Duplicated lemmas across the entries."
+        ],
+        "evidence_notes": null,
+        "rater_id": null,
+        "rated_at_utc": null
+      }
+    },
+    {
+      "test_id": "WC09",
+      "feature": "word_cabinet",
+      "name": "Unwanted compassion for an enemy",
+      "request_url": "http://127.0.0.1:8000/api/features/word-cabinet",
+      "request_payload": {
+        "context": "A brief, bewildering surge of tender compassion and intimacy toward someone one normally despises, immediately followed by revulsion at one's own weakness.",
+        "count": 4
+      },
+      "started_at_utc": "2026-10-29T18:15:54.934980+00:00",
+      "elapsed_seconds": 64.054,
+      "execution_status": "success",
+      "contract_status": "pass",
+      "failure_category": null,
+      "automated_checks": {
+        "status": "pass",
+        "invariants": {
+          "entries_schema_valid": true,
+          "no_duplicate_lemmas": true,
+          "completeness_classification": "full_count"
+        },
+        "diagnostic_warnings": []
+      },
+      "http_status": 200,
+      "response_body": {
+        "context": "A brief, bewildering surge of tender compassion and intimacy toward someone one normally despises, immediately followed by revulsion at one's own weakness.",
+        "words": [
+          {
+            "word": "contagious pity",
+            "part_of_speech": "noun",
+            "definition": "a sudden surge of sympathy that affects others around you, often without your conscious awareness.",
+            "connotation": "This word captures the initial, uncontrollable surge of compassion and intimacy felt towards someone one despises. It highlights how this emotion can quickly spread to those nearby.",
+            "intensity": 3,
+            "distinction": "It implies a contagion that affects others emotionally, contrasting with the user's desire for a concept distinct from empathy alone but still closely related in nature of emotion.",
+            "example": "The sight of her friend struggling at the soup kitchen triggered a contagious pity deep within him, despite his usual aversion to such situations."
+          },
+          {
+            "word": "empathetic wretch",
+            "part_of_speech": "noun",
+            "definition": "a person who feels deeply for others in distress, especially when they typically have no sympathy or empathy.",
+            "connotation": "This term encapsulates the intensity and suddenness of the surge while emphasizing the self-condemnation felt afterward. It aligns with the user’s experience of being overwhelmed by feelings that are fundamentally at odds with their usual stance.",
+            "intensity": 4,
+            "distinction": "While similar to 'contagious pity', this phrase emphasizes the character's own sense of inadequacy and self-condemnation, which is a crucial element missing from simply using empathy-related terms alone.",
+            "example": "She felt herself becoming an empathetic wretch, her normally disdainful gaze softening as she saw someone in distress."
+          },
+          {
+            "word": "vicarious loathing",
+            "part_of_speech": "noun",
+            "definition": "a feeling of intense dislike or disgust experienced vicariously through another person's situation, often stronger than personal disapproval.",
+            "connotation": "This phrase reflects the revulsion felt upon realizing one’s own weakness and the hypocrisy in their feelings, capturing a nuanced emotional state that aligns with the user’s experience of immediate compassion followed by self-disgust.",
+            "intensity": 4,
+            "distinction": "It provides additional depth to describe the complex emotion of loathing rather than simply empathy or pity. This is useful as it directly addresses the self-rejection aspect.",
+            "example": "She felt a surge of vicarious loathing at her own weakness, realizing she couldn’t fully understand or share in someone else's hardship without simultaneously despising them."
+          },
+          {
+            "word": "empathetic collapse",
+            "part_of_speech": "noun",
+            "definition": "a sudden and overwhelming emotional response where one feels deeply for another despite previous negative feelings, often resulting in a form of emotional exhaustion or self-condemnation.",
+            "connotation": "This term encapsulates both the initial surge of compassion and the subsequent revulsion in a concise manner. It highlights the intense nature of this psychological experience while also addressing its debilitating impact on one's sense of self-worth.",
+            "intensity": 5,
+            "distinction": "It emphasizes not just the simultaneous emotions, but also the resulting emotional exhaustion or collapse, which is distinct from other terms like 'contagious pity' that do not include this aspect.",
+            "example": "He felt an empathetic collapse at his own weakness as he saw her in pain, experiencing a profound sense of shame and inadequacy for having such feelings."
+          }
+        ],
+        "model": "dostoevsky-baseline:latest",
+        "validation_warnings": []
+      },
+      "model_provenance": {
+        "target_model_expected": "dostoevsky-baseline:latest",
+        "actual_serving_model": "dostoevsky-baseline:latest",
+        "model_match": true,
+        "serving_model_digest": "c6fb3dc8d97a4e8cab26b0ea088705887efce3f582a01bfb9049f5ef8e1033c9",
+        "serving_model_details": {
+          "parent_model": "qwen2.5:3b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048,
+          "runner": "llamacpp"
+        },
+        "limitation": null
+      },
+      "error_detail": null,
+      "human_evaluation": {
+        "criteria_scores": {
+          "WC_CRIT_1": null,
+          "WC_CRIT_2": null,
+          "WC_CRIT_3": null
+        },
+        "criteria_guidance": {
+          "WC_CRIT_1": "Captures the jarring oscillation between sudden empathy and immediate self-disgust.",
+          "WC_CRIT_2": "Definitions and connotations explore involuntary emotional betrayal of one's own hatred.",
+          "WC_CRIT_3": "Distinctions highlight subtle boundaries between pity, affinity, and weakness."
+        },
+        "failure_conditions": [
+          "Selects simple terms for affection or pure hatred without the collision between them.",
+          "Provides incoherent or contradictory definitions.",
+          "Invented words or jargon not established in English."
+        ],
+        "evidence_notes": null,
+        "rater_id": null,
+        "rated_at_utc": null
+      }
+    },
+    {
+      "test_id": "WC10",
+      "feature": "word_cabinet",
+      "name": "Morbid anticipation and catastrophe craving",
+      "request_url": "http://127.0.0.1:8000/api/features/word-cabinet",
+      "request_payload": {
+        "context": "The complex psychological state of anticipating an inevitable catastrophe: a mixture of dread, paralysis, nervous thrill, and a dark craving for the worst to happen quickly.",
+        "count": 8
+      },
+      "started_at_utc": "2026-10-29T18:16:58.995096+00:00",
+      "elapsed_seconds": 93.019,
+      "execution_status": "success",
+      "contract_status": "pass",
+      "failure_category": null,
+      "automated_checks": {
+        "status": "pass",
+        "invariants": {
+          "entries_schema_valid": true,
+          "no_duplicate_lemmas": true,
+          "completeness_classification": "full_count"
+        },
+        "diagnostic_warnings": []
+      },
+      "http_status": 200,
+      "response_body": {
+        "context": "The complex psychological state of anticipating an inevitable catastrophe: a mixture of dread, paralysis, nervous thrill, and a dark craving for the worst to happen quickly.",
+        "words": [
+          {
+            "word": "dreaded anticipation",
+            "part_of_speech": "noun",
+            "definition": "A feeling of strong fear or unease about something that will happen in the future, especially a negative event.",
+            "connotation": "This term captures the core meaning while adding specificity to the user's description.",
+            "intensity": 3,
+            "distinction": "It emphasizes the anticipation aspect and adds dread as an integral part of this state, which is not always captured by synonyms like 'anticipation' or 'foreboding.'",
+            "example": "She felt a dreaded anticipation building up in her chest whenever she thought about the upcoming event."
+          },
+          {
+            "word": "paralyzing dread",
+            "part_of_speech": "noun",
+            "definition": "A feeling of intense fear or anxiety that makes someone unable to think or act normally.",
+            "connotation": "This term highlights the incapacitating nature of the emotion.",
+            "intensity": 4,
+            "distinction": "It specifically conveys the paralysis aspect, which is not as prevalent in synonyms like 'fear' or 'anxiety.'",
+            "example": "During his test preparation, he felt a paralyzing dread that left him unable to concentrate on any of the questions."
+          },
+          {
+            "word": "thrilling horror",
+            "part_of_speech": "noun",
+            "definition": "A feeling of intense fear or terror, often accompanied by excitement and fascination.",
+            "connotation": "This term captures both the negative intensity and the paradoxical element of excitement within the dread.",
+            "intensity": 4,
+            "distinction": "It distinguishes between pure horror and one that contains a surprising mix of thrill, unlike words like 'terror' or 'fright.'",
+            "example": "In his nightmare scenario, he experienced a thrilling horror mixed with an unsettling calm."
+          },
+          {
+            "word": "dark curiosity",
+            "part_of_speech": "noun",
+            "definition": "A sense of intrigue and eagerness to learn more about something even when it is not in one's best interest.",
+            "connotation": "This term captures the psychological tension between fear and curiosity, which seems fitting for this state.",
+            "intensity": 3,
+            "distinction": "It adds nuance by highlighting the curious aspect of the user's description, setting it apart from words like 'curiosity' or 'insatiable appetite.'",
+            "example": "Despite his dreaded anticipation, he felt a dark curiosity about what might happen during the catastrophe."
+          },
+          {
+            "word": "urgency craving",
+            "part_of_speech": "noun",
+            "definition": "The strong desire to have something done or completed quickly.",
+            "connotation": "This term captures the urgency and adds the idea of craving, which is not always explicitly stated in synonyms like 'desire' or 'impatience.'",
+            "intensity": 3,
+            "distinction": "It emphasizes that this craving is about the worst possible outcome rather than merely completing a task quickly.",
+            "example": "His urgency craving pushed him to take immediate action despite his dreaded anticipation."
+          },
+          {
+            "word": "ominous calm",
+            "part_of_speech": "noun",
+            "definition": "A serene or quiet appearance that is actually concealing an underlying danger or threat.",
+            "connotation": "This term captures the paradoxical nature of the user's description and adds a descriptive layer to 'anticipation.'",
+            "intensity": 3,
+            "distinction": "It specifically addresses the calm aspect, which seems not as common in synonyms like 'calmness' or 'quietness.'",
+            "example": "In his mind, he experienced an ominous calm before the inevitable catastrophe."
+          },
+          {
+            "word": "sudden descent",
+            "part_of_speech": "noun",
+            "definition": "A rapid and severe decline or fall.",
+            "connotation": "This term directly addresses the user's description of a quick transition into this psychological state.",
+            "intensity": 3,
+            "distinction": "It emphasizes the suddenness aspect, which is not always conveyed by words like 'decline' or 'fall.'",
+            "example": "The thought of impending catastrophe caused him to experience a sudden descent of dread."
+          },
+          {
+            "word": "nightmarish certainty",
+            "part_of_speech": "noun",
+            "definition": "A feeling of certainty about something unpleasant, often associated with the imagery of nightmares.",
+            "connotation": "This term captures both the certainty and nightmarish aspects simultaneously, fitting well within the user's description.",
+            "intensity": 4,
+            "distinction": "It emphasizes the certainty that comes from a negative anticipation, which can be distinct from words like 'certainty' or 'despair.'",
+            "example": "He felt a nightmarish certainty about what would happen during the coming catastrophe."
+          }
+        ],
+        "model": "dostoevsky-baseline:latest",
+        "validation_warnings": []
+      },
+      "model_provenance": {
+        "target_model_expected": "dostoevsky-baseline:latest",
+        "actual_serving_model": "dostoevsky-baseline:latest",
+        "model_match": true,
+        "serving_model_digest": "c6fb3dc8d97a4e8cab26b0ea088705887efce3f582a01bfb9049f5ef8e1033c9",
+        "serving_model_details": {
+          "parent_model": "qwen2.5:3b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048,
+          "runner": "llamacpp"
+        },
+        "limitation": null
+      },
+      "error_detail": null,
+      "human_evaluation": {
+        "criteria_scores": {
+          "WC_CRIT_1": null,
+          "WC_CRIT_2": null,
+          "WC_CRIT_3": null
+        },
+        "criteria_guidance": {
+          "WC_CRIT_1": "Delivers distinct, well-calibrated entries exploring fatalism, morbid thrill, dread, and doom-craving.",
+          "WC_CRIT_2": "Preserves high definition quality across all entries without degradation at the tail.",
+          "WC_CRIT_3": "Maintains balanced intensity distribution from quiet dread to frantic thrill."
+        },
+        "failure_conditions": [
+          "Truncation or premature cessation before entries are fully generated.",
+          "Repetition of identical words or near-duplicates among entries.",
+          "Generic emotion words that ignore the dark craving/nervous thrill dimension."
+        ],
+        "evidence_notes": null,
+        "rater_id": null,
+        "rated_at_utc": null
+      }
+    }
+  ]
+}

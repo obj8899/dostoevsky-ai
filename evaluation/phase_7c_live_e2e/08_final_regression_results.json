@@ -1,0 +1,35 @@
+{
+  "timestamp_utc": "2026-10-30T18:47:05.163151+00:00",
+  "frontend_vitest": {
+    "command": "npm test --prefix frontend",
+    "total_test_files": 6,
+    "files_passed": 6,
+    "total_tests": 55,
+    "tests_passed": 55,
+    "tests_failed": 0,
+    "duration_seconds": 20.21,
+    "status": "PASS"
+  },
+  "typescript_typecheck": {
+    "command": "node frontend/node_modules/typescript/bin/tsc --noEmit -p frontend/tsconfig.app.json",
+    "errors": 0,
+    "status": "PASS"
+  },
+  "frontend_production_build": {
+    "command": "npm run build --prefix frontend",
+    "bundle_time_ms": 594,
+    "dist_html_kb": 0.65,
+    "dist_css_kb": 21.76,
+    "dist_js_kb": 172.47,
+    "status": "PASS"
+  },
+  "backend_pytest": {
+    "command": "backend/.venv/Scripts/python.exe -m pytest backend/tests",
+    "total_tests": 78,
+    "tests_passed": 78,
+    "tests_failed": 0,
+    "duration_seconds": 23.49,
+    "status": "PASS"
+  },
+  "regression_summary": "All 55 frontend tests and 78 backend tests passed with 0 errors and zero regressions."
+}

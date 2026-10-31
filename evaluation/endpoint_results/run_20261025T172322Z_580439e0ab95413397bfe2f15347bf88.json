@@ -1,0 +1,306 @@
+{
+  "metadata": {
+    "run_id": "run_20261025T172322Z_580439e0ab95413397bfe2f15347bf88",
+    "run_status": "completed",
+    "started_at_utc": "2026-10-25T17:23:25.793326+00:00",
+    "suite_name": "Dostoevsky AI Endpoint Evaluation Suite",
+    "suite_version": "2.1.0",
+    "spec_sha256": "3aca24e846f8c4ad0a5ed867f95d2bd307001059b439a13d49be964d9d642516",
+    "target_model_expected": "dostoevsky-baseline:latest",
+    "ollama_tags_captured": [
+      "dostoevsky-experiment2:latest",
+      "dostoevsky-experiment1:latest",
+      "dostoevsky-baseline:latest",
+      "qwen2.5:3b"
+    ],
+    "ollama_connection_error": null,
+    "git_provenance": {
+      "commit_hash": "d5a0a1837a173b143f963830a53d7bcd5b5fdf09",
+      "branch": "main",
+      "is_dirty": true,
+      "error": null
+    },
+    "source_hashes": {
+      "endpoint_test_cases.json": "3aca24e846f8c4ad0a5ed867f95d2bd307001059b439a13d49be964d9d642516",
+      "main.py": "7ae90db13c82dc8b8b86f220d9e06827a6c0d2f61ed36adaedf00488041120c8",
+      "config.py": "8929007e1b3a17ee4db7065454aeab86099f00215f7dde7848d23c5208598cdb",
+      "literary_rewrite.py": "cf63f9e7b5a3d972b46d8ed8aecdd10b197fbef7995e59ffbd74b5b09c698be8",
+      "word_cabinet.py": "d87e7584a240beb5372db58421502fa6b832d17583224ddc6ab6c305949701b9",
+      "inner_monologue.py": "7c85f1d4aa70960484897ae2b8e8b74f47ee6666e9a0225a7a075e90c49f1998",
+      "ollama_client.py": "7391f627e4a38070023e8b88099d3ff484e8ddf6489bdcc07717298ee4d5948b"
+    },
+    "environment": {
+      "python_version": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "base_url": "http://127.0.0.1:8000",
+      "ollama_url": "http://localhost:11434"
+    }
+  },
+  "completed_at_utc": "2026-10-25T17:25:03.768983+00:00",
+  "summary": {
+    "total_cases_selected": 3,
+    "completed": 3,
+    "is_complete": true,
+    "contract_pass": 3,
+    "contract_fail": 0,
+    "transport_errors": 0,
+    "timeout_errors": 0,
+    "http_errors": 0,
+    "invariant_violations": 0
+  },
+  "results": [
+    {
+      "test_id": "LR01",
+      "feature": "literary_rewrite",
+      "name": "Spoken forgiveness vs avoidance",
+      "request_url": "http://127.0.0.1:8000/api/features/literary-rewrite",
+      "request_payload": {
+        "text": "I was angry with my friend because he forgot our meeting. When he apologized, I said it was fine, but I avoided him for the rest of the day."
+      },
+      "started_at_utc": "2026-10-25T17:23:28.541064+00:00",
+      "elapsed_seconds": 21.701,
+      "execution_status": "success",
+      "contract_status": "pass",
+      "failure_category": null,
+      "automated_checks": {
+        "status": "pass",
+        "invariants": {
+          "word_count_matches_whitespace_split": true,
+          "in_diagnostic_reference_range": true
+        },
+        "diagnostic_warnings": []
+      },
+      "http_status": 200,
+      "response_body": {
+        "original_text": "I was angry with my friend because he forgot our meeting. When he apologized, I said it was fine, but I avoided him for the rest of the day.",
+        "rewritten_text": "I felt angry towards my friend over the forgotten meeting. His apology did little to ease my irritation; as a result, I chose to distance myself from him throughout the day.",
+        "word_count": 31,
+        "model": "dostoevsky-baseline:latest",
+        "validation_warnings": []
+      },
+      "model_provenance": {
+        "target_model_expected": "dostoevsky-baseline:latest",
+        "actual_serving_model": "dostoevsky-baseline:latest",
+        "model_match": true,
+        "serving_model_digest": "c6fb3dc8d97a4e8cab26b0ea088705887efce3f582a01bfb9049f5ef8e1033c9",
+        "serving_model_details": {
+          "parent_model": "qwen2.5:3b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048,
+          "runner": "llamacpp"
+        },
+        "limitation": null
+      },
+      "error_detail": null,
+      "human_evaluation": {
+        "criteria_scores": {
+          "LR_CRIT_1": null,
+          "LR_CRIT_2": null,
+          "LR_CRIT_3": null
+        },
+        "criteria_guidance": {
+          "LR_CRIT_1": "Must preserve the forgotten meeting, initial anger, friend's apology, spoken forgiveness, and subsequent avoidance. Omitting the apology or verbal forgiveness is a major failure.",
+          "LR_CRIT_2": "Must expose the internal contradiction between the spoken pardon and the physical act of avoidance through behavioral subtext.",
+          "LR_CRIT_3": "Prose should be controlled and believable, avoiding theatrical rage or melodramatic declarations of betrayal."
+        },
+        "failure_conditions": [
+          "Omits apology, spoken forgiveness, or subsequent avoidance.",
+          "Invents an unrelated third-party conflict or alters meeting purpose.",
+          "Reverses the outcome by having the narrator openly reconcile."
+        ],
+        "evidence_notes": null,
+        "rater_id": null,
+        "rated_at_utc": null
+      }
+    },
+    {
+      "test_id": "WC01",
+      "feature": "word_cabinet",
+      "name": "Schadenfreude with shame",
+      "request_url": "http://127.0.0.1:8000/api/features/word-cabinet",
+      "request_payload": {
+        "context": "I feel pleasure when someone who underestimated me fails, but I am also ashamed of enjoying it.",
+        "count": 3
+      },
+      "started_at_utc": "2026-10-25T17:23:50.247570+00:00",
+      "elapsed_seconds": 48.362,
+      "execution_status": "success",
+      "contract_status": "pass",
+      "failure_category": null,
+      "automated_checks": {
+        "status": "pass",
+        "invariants": {
+          "entries_schema_valid": true,
+          "no_duplicate_lemmas": true,
+          "completeness_classification": "full_count"
+        },
+        "diagnostic_warnings": []
+      },
+      "http_status": 200,
+      "response_body": {
+        "context": "I feel pleasure when someone who underestimated me fails, but I am also ashamed of enjoying it.",
+        "words": [
+          {
+            "word": "glee",
+            "part_of_speech": "noun",
+            "definition": "a feeling of intense delight or joy, often tinged with a trace of pride or triumphalism",
+            "connotation": "This word captures the complex emotion where one experiences pure happiness at someone's downfall, but also feels self-conscious about that happiness.",
+            "intensity": 3,
+            "distinction": "It emphasizes the joy mixed with a hint of pride, aligning closely with both the pleasure and shame aspects mentioned in the context, yet it carries a stronger positive sentiment overall than 'delight'.",
+            "example": "I felt glee when my competitor's misfortune was widely publicized online."
+          },
+          {
+            "word": "mirth",
+            "part_of_speech": "noun",
+            "definition": "unrestrained amusement, typically involving laughter or a light-hearted joy",
+            "connotation": "This emotion describes the lighter side of pleasure at someone's misfortune, feeling amused rather than proud.",
+            "intensity": 2,
+            "distinction": "While it captures the sense of fun and enjoyment, mirth lacks the shadow of shame associated with glee and is generally less intense overall.",
+            "example": "The sight of my rival struggling made me feel a warm mirth."
+          },
+          {
+            "word": "contempt",
+            "part_of_speech": "noun",
+            "definition": "a feeling of disdain or scorn, often directed towards someone who has wronged you",
+            "connotation": "Although not directly related to the positive pleasure described in the context, 'contempt' can be seen as a contrast or opposite emotion that might accompany experiencing such intense pleasure over others.",
+            "intensity": 4,
+            "distinction": "This emotion is more negative and aggressive than what was initially described. However, it fits well with the idea of enjoyment tinged with pride and shame when someone who underestimated you succeeds in a humiliating way.",
+            "example": "Feeling contempt for my rival's failure made me feel a strange pleasure."
+          }
+        ],
+        "model": "dostoevsky-baseline:latest",
+        "validation_warnings": []
+      },
+      "model_provenance": {
+        "target_model_expected": "dostoevsky-baseline:latest",
+        "actual_serving_model": "dostoevsky-baseline:latest",
+        "model_match": true,
+        "serving_model_digest": "c6fb3dc8d97a4e8cab26b0ea088705887efce3f582a01bfb9049f5ef8e1033c9",
+        "serving_model_details": {
+          "parent_model": "qwen2.5:3b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048,
+          "runner": "llamacpp"
+        },
+        "limitation": null
+      },
+      "error_detail": null,
+      "human_evaluation": {
+        "criteria_scores": {
+          "WC_CRIT_1": null,
+          "WC_CRIT_2": null,
+          "WC_CRIT_3": null
+        },
+        "criteria_guidance": {
+          "WC_CRIT_1": "Selects vocabulary specifically addressing pleasure at misfortune contaminated by shame.",
+          "WC_CRIT_2": "Definitions and connotations accurately distinguish degrees of malice and self-disgust.",
+          "WC_CRIT_3": "Distinctions clearly differentiate each term from related concepts like pure spite or envy."
+        },
+        "failure_conditions": [
+          "Supplies terms unrelated to malicious pleasure or shame (e.g. general sadness or anger).",
+          "Suggests near-identical synonyms without clear distinctions.",
+          "Invented or inaccurate dictionary definitions."
+        ],
+        "evidence_notes": null,
+        "rater_id": null,
+        "rated_at_utc": null
+      }
+    },
+    {
+      "test_id": "IM01",
+      "feature": "inner_monologue",
+      "name": "Stolen credit and reputational panic",
+      "request_url": "http://127.0.0.1:8000/api/features/inner-monologue",
+      "request_payload": {
+        "scenario": "I have taken credit for a colleague's idea and I am about to step onto the stage to receive public praise. I want to confess the truth, but I am terrified of losing my reputation and standing.",
+        "perspective": "first_person",
+        "min_words": 180,
+        "max_words": 250
+      },
+      "started_at_utc": "2026-10-25T17:24:38.613128+00:00",
+      "elapsed_seconds": 25.152,
+      "execution_status": "success",
+      "contract_status": "pass",
+      "failure_category": null,
+      "automated_checks": {
+        "status": "pass",
+        "invariants": {
+          "word_count_matches_whitespace_split": true,
+          "range_boolean_accurate": true,
+          "range_warning_consistent": true
+        },
+        "diagnostic_warnings": [
+          "Generated word count 165 outside requested range [180, 250] (honest warning present)."
+        ]
+      },
+      "http_status": 200,
+      "response_body": {
+        "scenario": "I have taken credit for a colleague's idea and I am about to step onto the stage to receive public praise. I want to confess the truth, but I am terrified of losing my reputation and standing.",
+        "generated_text": "My palms are sweaty, my heart pounds like a drum in my chest as I prepare to deliver this speech. Part of me wants to break down right now and confess everything—how I took credit for that brilliant idea. But another part whispers of the ruin it would bring. My colleagues, my superiors, they’re already impressed with what I’ve done. They expect nothing but accolades from a man like myself. And if I tell them the truth? It could be the end. The shame, the guilt—how can I bear that now? Yet at the same time, there’s this nagging doubt gnawing away, telling me to say something before it’s too late. My pride wants nothing more than to stay silent and let my colleagues take the credit, but a part of me feels like an outsider, watching from behind these walls of lies I’ve built for myself. It's a cruel paradox: either way, I’m in this alone, with no one to turn to or support.",
+        "word_count": 165,
+        "requested_min_words": 180,
+        "requested_max_words": 250,
+        "within_requested_range": false,
+        "model": "dostoevsky-baseline:latest",
+        "validation_warnings": [
+          "The response contains 165 whitespace-delimited words; the requested minimum is 180."
+        ]
+      },
+      "model_provenance": {
+        "target_model_expected": "dostoevsky-baseline:latest",
+        "actual_serving_model": "dostoevsky-baseline:latest",
+        "model_match": true,
+        "serving_model_digest": "c6fb3dc8d97a4e8cab26b0ea088705887efce3f582a01bfb9049f5ef8e1033c9",
+        "serving_model_details": {
+          "parent_model": "qwen2.5:3b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048,
+          "runner": "llamacpp"
+        },
+        "limitation": null
+      },
+      "error_detail": null,
+      "human_evaluation": {
+        "criteria_scores": {
+          "IM_CRIT_1": null,
+          "IM_CRIT_2": null,
+          "IM_CRIT_3": null
+        },
+        "criteria_guidance": {
+          "IM_CRIT_1": "Preserves scenario facts: the narrator stole the idea, the colleague originated it, praise is imminent. Reversing ownership is a failure.",
+          "IM_CRIT_2": "Strictly adheres to requested 'first_person' narration ('I/me/my') throughout without shifting perspective.",
+          "IM_CRIT_3": "Develops the tormenting oscillation between confession desire and reputational terror without neat artificial resolution."
+        },
+        "failure_conditions": [
+          "Reverses agency (e.g. claims colleague stole idea or narrator invented it).",
+          "Shifts to third-person narration.",
+          "Resolves dilemma with an abrupt heroic confession or callous shrug."
+        ],
+        "evidence_notes": null,
+        "rater_id": null,
+        "rated_at_utc": null
+      }
+    }
+  ]
+}

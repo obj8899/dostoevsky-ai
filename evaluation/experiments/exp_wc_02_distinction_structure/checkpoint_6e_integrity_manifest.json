@@ -1,0 +1,79 @@
+{
+  "manifest_version": "1.0.0",
+  "experiment_id": "EXP-WC-02-DISTINCTION-STRUCTURE",
+  "generated_at_utc": "2026-10-30T16:54:45.655964+00:00",
+  "input_artifacts": {
+    "human_rater_01_submission": {
+      "path": "evaluation\\experiments\\exp_wc_02_distinction_structure\\submissions\\human_rater_01_completed.json",
+      "sha256": "f1e91c4e9af7474ff19070c27666a9ad0977063a9827ed6ed9af27f1d3ca0700",
+      "bytes": 28073
+    },
+    "human_rater_02_submission": {
+      "path": "evaluation\\experiments\\exp_wc_02_distinction_structure\\submissions\\human_rater_02_completed (1).json",
+      "sha256": "54d81433fb4592cea4623c3f8fdee501dd2378f09216db134e70927f25fdb58f",
+      "bytes": 18386
+    },
+    "blinded_evaluation_key": {
+      "path": "evaluation\\experiments\\exp_wc_02_distinction_structure\\blinded_evaluation_key_20_items.json",
+      "sha256": "57c39532d41eedbc7e607948298a3a0dd13992ce526dadeb940ba8a7775b5827",
+      "bytes": 4310
+    },
+    "blinded_worksheet_json": {
+      "path": "evaluation\\experiments\\exp_wc_02_distinction_structure\\blinded_evaluation_worksheet_20_items.json",
+      "sha256": "d0af25b9139a7452ed815382c040fd00491d99a9ab784e63ab82265cbde6f6a4",
+      "bytes": 78399
+    },
+    "blinded_worksheet_md": {
+      "path": "evaluation\\experiments\\exp_wc_02_distinction_structure\\blinded_evaluation_worksheet_20_items.md",
+      "sha256": "05dd0890a845205875b16d06819eb6dcb59183f7835cec5911dc7bd86fef2d9a",
+      "bytes": 71944
+    },
+    "experimental_run_raw": {
+      "path": "evaluation\\experiments\\exp_wc_02_distinction_structure\\run_20261030T151334Z_7e82bfc0665e42abac0bd4e6b55747dd.json",
+      "sha256": "a33a4fe2e7b24ff097237d5d0982e2ef9923808ae4ec9b5b96cc17f7d5bd3fa1",
+      "bytes": 69991
+    },
+    "historical_baseline_container": {
+      "path": "evaluation\\endpoint_results\\blinded_human_evaluation_scores_run_20261025T180347Z.json",
+      "sha256": "81e650d7a65d4f28d7190f99a7c3276aa22ae98862e8c24e18a7d6250f3fbc0b",
+      "bytes": 161248
+    },
+    "current_word_cabinet_prompt": {
+      "path": "backend\\src\\dostoevsky_ai\\prompts\\word_cabinet.py",
+      "sha256": "13aa04df7c143015cb8f471988f7568f364b1850e6df4bb3f40b28b047299015",
+      "bytes": 1639
+    }
+  },
+  "output_artifacts": {
+    "formal_scoring_container": {
+      "path": "evaluation\\experiments\\exp_wc_02_distinction_structure\\wc_02_human_primary_scores.json",
+      "sha256": "ed6965923fd3cb4a3d145e9c03f2a717e695d4000881c0f0debbb353709a49ef",
+      "bytes": 57645
+    },
+    "human_primary_comparison_json": {
+      "path": "evaluation\\experiments\\exp_wc_02_distinction_structure\\checkpoint_6e_human_primary_comparison.json",
+      "sha256": "a08ff34e8a795dc6b3ccc64d7ed6dd0f99e9be97b5d24d33b8ab056437289dcd",
+      "bytes": 56026
+    },
+    "item_level_comparison_csv": {
+      "path": "evaluation\\experiments\\exp_wc_02_distinction_structure\\checkpoint_6e_item_level_comparison.csv",
+      "sha256": "3e3f1e50d929eff124d4b3a276872f20230c78349325eb7795a10522ca59714e",
+      "bytes": 1315
+    },
+    "inter_rater_agreement_json": {
+      "path": "evaluation\\experiments\\exp_wc_02_distinction_structure\\checkpoint_6e_inter_rater_agreement.json",
+      "sha256": "f8fece66a645e7defc01b70c612bd3fc46a47a1b674191b5ebd8c90a5895ca28",
+      "bytes": 3825
+    },
+    "ingestion_audit_md": {
+      "path": "evaluation\\experiments\\exp_wc_02_distinction_structure\\checkpoint_6e_ingestion_audit.md",
+      "sha256": "93f1060f6775450a78b1974ffb8d717ef41dd90c545168c1708f219a1a255109",
+      "bytes": 3603
+    },
+    "final_human_evaluation_report_md": {
+      "path": "evaluation\\experiments\\exp_wc_02_distinction_structure\\CHECKPOINT_6E_FINAL_HUMAN_EVALUATION_REPORT.md",
+      "sha256": "f8745e71faed681520eadb9df9bc6269f6982da9c3f9f4a3808999088623e597",
+      "bytes": 21142
+    }
+  }
+}

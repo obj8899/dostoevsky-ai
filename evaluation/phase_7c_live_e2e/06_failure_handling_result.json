@@ -1,0 +1,57 @@
+{
+  "test_id": "PHASE-7C-5-FAILURE-RESILIENCE",
+  "timestamp_utc": "2026-10-30T18:44:41.935204+00:00",
+  "scenarios": [
+    {
+      "id": "ERR-01-BACKEND-UNAVAILABLE",
+      "method": "Automated integration & component tests (App.test.tsx, client.test.ts) + live network error boundary verification",
+      "exercised_type": "Simulated Network Failure & Real Transport Rejection",
+      "behavior_observed": "Frontend catch block intercepts network rejection, sets connection='unavailable', displays 'Backend offline' status badge with retry button, user drafts preserved in DOM",
+      "verdict": "VERIFIED"
+    },
+    {
+      "id": "ERR-02-OLLAMA-UNAVAILABLE",
+      "method": "FastAPI TestClient with unreachable Ollama port (127.0.0.1:11439) + live component tests",
+      "exercised_type": "Real HTTP Endpoint against Offline Port Simulation",
+      "backend_health_status": 200,
+      "backend_health_payload": {
+        "status": "degraded",
+        "ollama": {
+          "status": "unavailable",
+          "model": "dostoevsky-baseline:latest",
+          "model_available": null,
+          "error": "Timed out while checking the local Ollama service."
+        }
+      },
+      "backend_feature_status": 503,
+      "backend_feature_detail": {
+        "detail": "The local Ollama service is unavailable. Check that Ollama is running and try again."
+      },
+      "frontend_behavior": "Frontend evaluates health status to 'degraded', topbar displays amber dot 'Ollama unavailable' with retry button, feature requests receive 503 with helpful message, user drafts remain intact",
+      "verdict": "VERIFIED"
+    },
+    {
+      "id": "ERR-03-INVALID-INPUT",
+      "method": "Live HTTP POST requests to running FastAPI server (http://localhost:8000)",
+      "exercised_type": "Live HTTP Endpoint Verification",
+      "tests_run": 8,
+      "tests_passed": 8,
+      "all_422": true,
+      "verdict": "VERIFIED"
+    },
+    {
+      "id": "ERR-04-GENERATION-TIMEOUT",
+      "method": "AbortController in client.ts + 504 Timeout mock tests in InnerMonologue.test.tsx and client.test.ts",
+      "exercised_type": "Mocked Gateway Timeout Boundary",
+      "behavior_observed": "504 Gateway Timeout translates to ApiError, displays 'Inference request timed out' alert, draft text remains in input box, retry button available",
+      "verdict": "VERIFIED (Boundary Mocked)"
+    },
+    {
+      "id": "ERR-05-MALFORMED-RESPONSE",
+      "method": "Schema validator unit tests in client.test.ts (Word Cabinet invalid entries, missing fields, corrupted JSON)",
+      "exercised_type": "Deterministic Contract Boundary Tests",
+      "behavior_observed": "Client validator throws ApiError('invalid response schema'), prevented corrupted model output from reaching state, displays error alert without crashing",
+      "verdict": "VERIFIED (Boundary Mocked)"
+    }
+  ]
+}

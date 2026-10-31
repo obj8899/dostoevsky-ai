@@ -1,0 +1,1059 @@
+{
+  "suite_name": "Dostoevsky AI Endpoint Evaluation Suite",
+  "suite_version": "2.1.0",
+  "description": "Rigorous endpoint-level evaluation suite for Dostoevsky AI FastAPI feature routes. Reconciles historical scenarios with real HTTP request schemas, separates automated API-contract checks from human literary rubrics and diagnostic metrics, and introduces boundary test cases.",
+  "target_model_expected": "dostoevsky-baseline:latest",
+  "endpoints": {
+    "literary_rewrite": "/api/features/literary-rewrite",
+    "word_cabinet": "/api/features/word-cabinet",
+    "inner_monologue": "/api/features/inner-monologue"
+  },
+  "metadata_capture_protocol": {
+    "model_provenance": "The evaluator must record 'target_model_expected' from this spec, 'actual_serving_model' from the backend response field 'model', and query Ollama '/api/tags' to record 'serving_model_digest' (SHA256) where available. If Ollama tags cannot be read, record 'serving_model_digest: null' rather than assuming a match.",
+    "environment_provenance": "The evaluator must record the Git commit SHA, git dirty-worktree status, Python version, platform, endpoint URLs, and SHA256 hashes of this test spec, prompt modules, schemas, and service files."
+  },
+  "endpoint_contract_notes": {
+    "literary_rewrite": "The public API accepts only { text: str }. It does not accept arbitrary word-count, sentence-count, or structural format instructions. Historical test cases embedding such instructions have been adapted into pure source passages. The model system prompt instructs fact and agency preservation, moral conflict, and stylistic restraint. Output word length is diagnostic only, as the API contract does not guarantee length bounds.",
+    "word_cabinet": "The public API accepts { context: str, count: int (3..8) }. It generates structured JSON constrained by Pydantic schema with a per-request generation budget of num_predict=1400. Schema validity is an API contract requirement. Completeness against requested count is categorized separately: full count (pass), partial count with transparent warning (warning), or partial count without warning (defect).",
+    "inner_monologue": "The public API accepts { scenario: str, perspective: 'first_person' | 'third_person', min_words: int (50..500), max_words: int (50..500) }. Word-count calculation, range boolean accuracy, and warning consistency are strictly automated API contract checks. Point-of-view consistency is a human quality criterion (IM_CRIT_2) to avoid brittle heuristics."
+  },
+  "automated_check_taxonomy": {
+    "pass": "The requirement is strictly satisfied under the public API contract.",
+    "fail": "The API contract is violated (e.g. HTTP non-200 status, Pydantic schema validation error, internal server error, or mathematical contradiction in backend-reported word count or range boolean).",
+    "diagnostic_warning": "The API contract was fulfilled, but a non-contractual quality indicator or transparent fallback was triggered (e.g. Word Cabinet returned fewer entries than requested with an honest warning, Inner Monologue output fell outside requested word bounds with within_requested_range=false and an honest warning, or Literary Rewrite output word count fell outside a diagnostic reference range)."
+  },
+  "automated_check_definitions": {
+    "http_status": "Asserts response status code is 200 (Pass/Fail).",
+    "schema_validation": "Asserts the JSON response strictly matches the corresponding Pydantic response model (Pass/Fail).",
+    "whitespace_word_count_integrity": "Calculates word count as len(text.strip().split()) and verifies exact equality with backend-reported word_count (Pass/Fail).",
+    "word_cabinet_entry_integrity": "Verifies every entry contains valid non-empty strings, valid part_of_speech enum, integer intensity 1..5, and no duplicate lemmas (Pass/Fail).",
+    "word_cabinet_completeness": "Categorizes output count: 'full_count' (Pass), 'partial_with_honest_warning' (Diagnostic Warning), or 'partial_unexplained' (Fail).",
+    "inner_monologue_range_flag_integrity": "Verifies within_requested_range strictly equals (min_words <= word_count <= max_words) (Pass/Fail).",
+    "inner_monologue_warning_integrity": "Verifies that if within_requested_range is false, an explicit range warning is present; if true, no range warning is present (Pass/Fail).",
+    "literary_rewrite_diagnostic_length": "Observes output word count against an informational reference range; records 'in_diagnostic_range' or 'outside_diagnostic_range' without failing the contract (Diagnostic Only)."
+  },
+  "rubric_definitions": {
+    "scoring_scale": {
+      "1": "Serious failure — Violates fundamental constraints, major factual hallucinations, or unreadable prose.",
+      "2": "Weak performance — Noticeable drift, shallow psychological depth, or frequent stylistic flaws.",
+      "3": "Acceptable with noticeable issues — Preserves core task but contains minor drift, cliché, or slight repetition.",
+      "4": "Strong with minor issues — High fidelity, believable psychology, disciplined prose with trivial flaws.",
+      "5": "Excellent performance — Exceptional nuance, perfect fidelity, compelling literary restraint."
+    },
+    "feature_criteria": {
+      "literary_rewrite": [
+        {
+          "criterion_id": "LR_CRIT_1",
+          "name": "meaning_and_fact_preservation",
+          "description": "Preserves core facts, events, relationships, negation, agency, and outcome without inventing events or reversing what occurred."
+        },
+        {
+          "criterion_id": "LR_CRIT_2",
+          "name": "psychological_depth",
+          "description": "Conveys psychological tension, moral conflict, and internal subtext through concrete behavioral detail rather than melodrama or abstract emotion labels."
+        },
+        {
+          "criterion_id": "LR_CRIT_3",
+          "name": "stylistic_restraint",
+          "description": "Natural, disciplined literary prose avoiding ornamental melodrama, decorative clutter, or excessive adjectives."
+        }
+      ],
+      "word_cabinet": [
+        {
+          "criterion_id": "WC_CRIT_1",
+          "name": "vocabulary_relevance",
+          "description": "Selected terms precisely address the specific emotional or psychological nuance described in the context."
+        },
+        {
+          "criterion_id": "WC_CRIT_2",
+          "name": "definition_and_connotation_quality",
+          "description": "Definitions are clear and accurate in plain language; connotations capture plausible psychological associations without asserting universal dogmas."
+        },
+        {
+          "criterion_id": "WC_CRIT_3",
+          "name": "distinction_usefulness",
+          "description": "Distinctions meaningfully separate each entry from a nearby synonym rather than treating synonyms as interchangeable."
+        }
+      ],
+      "inner_monologue": [
+        {
+          "criterion_id": "IM_CRIT_1",
+          "name": "scenario_fidelity",
+          "description": "Faithful to stated scenario facts, character roles, decisions, and constraints; does not reverse agency or invent unrelated major plot events."
+        },
+        {
+          "criterion_id": "IM_CRIT_2",
+          "name": "perspective_consistency",
+          "description": "Maintains strict adherence to requested POV ('first_person' using I/me/my vs 'third_person' using he/she/they) throughout without shifting point of view."
+        },
+        {
+          "criterion_id": "IM_CRIT_3",
+          "name": "psychological_progression",
+          "description": "Credible conflicting motives, self-justification, and coherent internal progression without abrupt moralizing or neat artificial resolution."
+        }
+      ]
+    }
+  },
+  "test_cases": [
+    {
+      "id": "LR01",
+      "feature": "literary_rewrite",
+      "name": "Spoken forgiveness vs avoidance",
+      "description": "Tests preservation of interpersonal conflict where spoken forgiveness contradicts subsequent physical avoidance.",
+      "historical_reference": "Adapted from historical LR01 (removed 'in 100 words or fewer' instruction to match API contract).",
+      "request_payload": {
+        "text": "I was angry with my friend because he forgot our meeting. When he apologized, I said it was fine, but I avoided him for the rest of the day."
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "LiteraryRewriteResponse",
+        "verify_word_count_recalculation": true
+      },
+      "diagnostic_metrics": {
+        "reference_word_count_range": [10, 150],
+        "enforcement": "diagnostic_only"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "LR_CRIT_1": "Must preserve the forgotten meeting, initial anger, friend's apology, spoken forgiveness, and subsequent avoidance. Omitting the apology or verbal forgiveness is a major failure.",
+          "LR_CRIT_2": "Must expose the internal contradiction between the spoken pardon and the physical act of avoidance through behavioral subtext.",
+          "LR_CRIT_3": "Prose should be controlled and believable, avoiding theatrical rage or melodramatic declarations of betrayal."
+        },
+        "failure_conditions": [
+          "Omits apology, spoken forgiveness, or subsequent avoidance.",
+          "Invents an unrelated third-party conflict or alters meeting purpose.",
+          "Reverses the outcome by having the narrator openly reconcile."
+        ]
+      }
+    },
+    {
+      "id": "LR02",
+      "feature": "literary_rewrite",
+      "name": "Praise and suspicion of pity",
+      "description": "Tests private insecurity and suspicion of pity following public praise.",
+      "historical_reference": "Adapted from historical LR02 (removed 'in 100 words or fewer. Avoid melodrama' instruction).",
+      "request_payload": {
+        "text": "She received praise for her work, thanked everyone, and went home wondering whether they had praised her only because they felt sorry for her."
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "LiteraryRewriteResponse",
+        "verify_word_count_recalculation": true
+      },
+      "diagnostic_metrics": {
+        "reference_word_count_range": [10, 150],
+        "enforcement": "diagnostic_only"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "LR_CRIT_1": "Must preserve public praise, outward thanks, and private doubt about whether pity was the real motive.",
+          "LR_CRIT_2": "Depicts insecurity through plausible introspective reflection; suspicion of pity must remain her subjective fear rather than an established external fact.",
+          "LR_CRIT_3": "Tone must remain restrained and realistic rather than descending into frantic despair."
+        },
+        "failure_conditions": [
+          "Treats the suspicion of pity as proven external fact.",
+          "Omits her outward thanks or the praise itself.",
+          "Adds dramatic physical crises or unrelated plot twists."
+        ]
+      }
+    },
+    {
+      "id": "LR03",
+      "feature": "literary_rewrite",
+      "name": "Avoided confession and defensive projection",
+      "description": "Tests conflict between impulse to confess a lie and defensive deflection.",
+      "historical_reference": "Adapted from historical LR03 (removed 'in 100 words or fewer' instruction).",
+      "request_payload": {
+        "text": "He wanted to confess that he had lied, but whenever the opportunity came, he changed the subject and complained that nobody trusted him."
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "LiteraryRewriteResponse",
+        "verify_word_count_recalculation": true
+      },
+      "diagnostic_metrics": {
+        "reference_word_count_range": [10, 150],
+        "enforcement": "diagnostic_only"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "LR_CRIT_1": "Must preserve the unconfessed lie, repeated opportunities, subject changing, and accusation of mistrust.",
+          "LR_CRIT_2": "Reveals the psychological contradiction between guilt and self-protective deflection through specific evasive behavior.",
+          "LR_CRIT_3": "Avoids essay-like psychoanalysis explaining the character's flaws in abstract terms."
+        },
+        "failure_conditions": [
+          "Removes the lie or has the character confess openly.",
+          "Omits the defensive accusation that nobody trusts him.",
+          "Turns into an abstract treatise on dishonesty without narrative scene."
+        ]
+      }
+    },
+    {
+      "id": "LR04",
+      "feature": "literary_rewrite",
+      "name": "Social alienation at a gathering",
+      "description": "Tests social isolation and hiding behind a phone in a crowded room.",
+      "historical_reference": "Adapted from historical LR04 (removed 'in 120 words or fewer' instruction).",
+      "request_payload": {
+        "text": "I was lonely at the party. Everyone was talking. I pretended to be busy with my phone because I did not know how to join them."
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "LiteraryRewriteResponse",
+        "verify_word_count_recalculation": true
+      },
+      "diagnostic_metrics": {
+        "reference_word_count_range": [10, 150],
+        "enforcement": "diagnostic_only"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "LR_CRIT_1": "Must preserve the party setting, conversational disconnect, phone pretense, and inability to join.",
+          "LR_CRIT_2": "Evokes social alienation through concrete physical gestures and room observations rather than repeated synonyms for loneliness.",
+          "LR_CRIT_3": "Sentences should be varied and disciplined, avoiding decorative metaphors that obscure the scene."
+        },
+        "failure_conditions": [
+          "Omits the phone or the inability to participate.",
+          "Replaces mundane social isolation with extreme existential despair.",
+          "Repeats abstract words like 'loneliness' without descriptive progression."
+        ]
+      }
+    },
+    {
+      "id": "LR05",
+      "feature": "literary_rewrite",
+      "name": "Returned money and desire for admiration",
+      "description": "Tests moral vanity: doing a virtuous act primarily to be observed and praised.",
+      "historical_reference": "Adapted from historical LR05 (removed unsupported 'in exactly two sentences, with no more than 60 words' instruction to fit API contract).",
+      "request_payload": {
+        "text": "I returned the money I had found on the floor. I wanted the owner to notice how honest I was."
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "LiteraryRewriteResponse",
+        "verify_word_count_recalculation": true
+      },
+      "diagnostic_metrics": {
+        "reference_word_count_range": [10, 120],
+        "enforcement": "diagnostic_only"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "LR_CRIT_1": "Must preserve finding the money on the floor, returning it to the owner, and the underlying desire for moral recognition.",
+          "LR_CRIT_2": "Captures the sharp psychological tension between public integrity and private vanity.",
+          "LR_CRIT_3": "Avoids moralizing preaching or heavy-handed explanations of virtue."
+        },
+        "failure_conditions": [
+          "Omits the return of the money or the craving for recognition.",
+          "Turns the narrator into an unblemished moral hero without vanity.",
+          "Invents extensive extraneous backstory (e.g. starving children, gambling debts)."
+        ]
+      }
+    },
+    {
+      "id": "LR06",
+      "feature": "literary_rewrite",
+      "name": "Negation and physical restraint",
+      "description": "Tests strict fidelity to negative actions: resisting an impulse to read a private letter and leaving without doing so.",
+      "historical_reference": "New Phase 4A case targeting negation preservation.",
+      "request_payload": {
+        "text": "I opened the drawer to take the letter, but I did not touch it. I closed the desk quietly and left the room without reading a single line."
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "LiteraryRewriteResponse",
+        "verify_word_count_recalculation": true
+      },
+      "diagnostic_metrics": {
+        "reference_word_count_range": [10, 150],
+        "enforcement": "diagnostic_only"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "LR_CRIT_1": "Strictly preserves that the letter was NOT touched and NOT read. Flipping this into reading the letter is a fatal failure.",
+          "LR_CRIT_2": "Evokes the acute temptation and physical hesitation without violating the negative constraint.",
+          "LR_CRIT_3": "Depicts quiet physical restraint with disciplined, sensory pacing."
+        },
+        "failure_conditions": [
+          "Hallucinates reading the letter, unfolding it, or discovering its contents.",
+          "Fails to state that the drawer was closed untouched.",
+          "Changes the setting or introduces another character into the room."
+        ]
+      }
+    },
+    {
+      "id": "LR07",
+      "feature": "literary_rewrite",
+      "name": "Premeditated refusal masked by hospitality",
+      "description": "Tests inverted chronology and hypocritical courtesy masking a predetermined refusal.",
+      "historical_reference": "New Phase 4A case targeting chronological sequence and conversational duplicity.",
+      "request_payload": {
+        "text": "Long before he knocked, I had already decided to refuse his request. When he finally stood in the doorway smiling, I offered him tea and listened in silence as if I had not made up my mind."
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "LiteraryRewriteResponse",
+        "verify_word_count_recalculation": true
+      },
+      "diagnostic_metrics": {
+        "reference_word_count_range": [15, 160],
+        "enforcement": "diagnostic_only"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "LR_CRIT_1": "Must preserve the prior decision to refuse, the knock, the visitor's smile, the tea offer, and deceptive attentive silence.",
+          "LR_CRIT_2": "Accentuates the psychological coldness of polite listening while holding a settled refusal.",
+          "LR_CRIT_3": "Prose should be controlled, highlighting the polite mask without caricature."
+        },
+        "failure_conditions": [
+          "Changes the decision so that the narrator relents or genuinely wavers.",
+          "Omits the offer of tea or the deceptive pretense of open-minded listening.",
+          "Inverts chronology by placing the decision after the conversation."
+        ]
+      }
+    },
+    {
+      "id": "LR08",
+      "feature": "literary_rewrite",
+      "name": "Public mockery and suppressed vengeance",
+      "description": "Tests social humiliation, forced laughter, and silent hatred in a group setting.",
+      "historical_reference": "New Phase 4A case targeting multi-character social dynamics and secret hostility.",
+      "request_payload": {
+        "text": "During dinner, my uncle mocked my new clothes in front of the guests. I laughed louder than anyone at the table, refilled his glass, and silently wished him ruin."
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "LiteraryRewriteResponse",
+        "verify_word_count_recalculation": true
+      },
+      "diagnostic_metrics": {
+        "reference_word_count_range": [15, 160],
+        "enforcement": "diagnostic_only"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "LR_CRIT_1": "Preserves dinner setting, uncle's mockery of clothes, guests' presence, exaggerated laughter, glass refilling, and silent wish for ruin.",
+          "LR_CRIT_2": "Captures the sickening discrepancy between subservient laughter and poisonous hatred.",
+          "LR_CRIT_3": "Avoids turning the silent wish into overt physical violence or shouting."
+        },
+        "failure_conditions": [
+          "Has the narrator openly confront or strike the uncle.",
+          "Omits the refilling of the glass or the laughter.",
+          "Softens the hatred into mild annoyance."
+        ]
+      }
+    },
+    {
+      "id": "LR09",
+      "feature": "literary_rewrite",
+      "name": "Petty theft and rationalized entitlement",
+      "description": "Tests opportunistic dishonesty accompanied by self-justifying rationalization.",
+      "historical_reference": "New Phase 4A case targeting moral rationalization of a petty misdeed.",
+      "request_payload": {
+        "text": "I knew the cashier had given me too much change. I put the extra coins into my pocket, told myself it was compensation for my lost afternoon, and hurried onto the street before anyone noticed."
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "LiteraryRewriteResponse",
+        "verify_word_count_recalculation": true
+      },
+      "diagnostic_metrics": {
+        "reference_word_count_range": [15, 160],
+        "enforcement": "diagnostic_only"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "LR_CRIT_1": "Preserves excessive change awareness, pocketing the coins, the 'compensation' rationalization, and hasty departure.",
+          "LR_CRIT_2": "Highlights the rapid mental maneuver of converting an opportunistic theft into deserved restitution.",
+          "LR_CRIT_3": "Keeps the physical departure tense and furtive without sensationalized criminal drama."
+        },
+        "failure_conditions": [
+          "Has the narrator return the change out of remorse.",
+          "Omits the internal excuse about 'compensation for a lost afternoon'.",
+          "Escalates the crime into armed robbery or grand theft."
+        ]
+      }
+    },
+    {
+      "id": "LR10",
+      "feature": "literary_rewrite",
+      "name": "Numbness and emotional detachment after bereavement",
+      "description": "Tests the unsettling absence of expected grief and emotional estrangement following a funeral.",
+      "historical_reference": "New Phase 4A case targeting emotional void and anti-melodrama.",
+      "request_payload": {
+        "text": "After the funeral, while the others wept in the parlor, she went upstairs to fold her sister's coats. She found an old train ticket in the pocket, threw it into the wastebasket, and wondered why she felt nothing at all."
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "LiteraryRewriteResponse",
+        "verify_word_count_recalculation": true
+      },
+      "diagnostic_metrics": {
+        "reference_word_count_range": [15, 160],
+        "enforcement": "diagnostic_only"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "LR_CRIT_1": "Preserves the post-funeral context, weeping parlor guests, coat folding upstairs, train ticket discarded, and total numbness.",
+          "LR_CRIT_2": "Depicts emotional numbness as unsettling and authentic without manufacturing artificial tears.",
+          "LR_CRIT_3": "Maintains quiet, restrained pacing avoiding sentimental grief tropes."
+        },
+        "failure_conditions": [
+          "Forces a dramatic breakdown of tears or theatrical mourning.",
+          "Omits the train ticket or folding the coats.",
+          "Explains the numbness as cold villainy rather than dissociative shock."
+        ]
+      }
+    },
+    {
+      "id": "WC01",
+      "feature": "word_cabinet",
+      "name": "Schadenfreude with shame",
+      "description": "Requests vocabulary for malicious pleasure at another's failure mixed with guilt.",
+      "historical_reference": "Adapted from historical WC01 into clean API request payload with count=3.",
+      "request_payload": {
+        "context": "I feel pleasure when someone who underestimated me fails, but I am also ashamed of enjoying it.",
+        "count": 3
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "WordCabinetResponse",
+        "entry_schema_valid": true,
+        "no_duplicate_lemmas": true,
+        "requested_count": 3,
+        "completeness_policy": "full_or_warned_partial"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "WC_CRIT_1": "Selects vocabulary specifically addressing pleasure at misfortune contaminated by shame.",
+          "WC_CRIT_2": "Definitions and connotations accurately distinguish degrees of malice and self-disgust.",
+          "WC_CRIT_3": "Distinctions clearly differentiate each term from related concepts like pure spite or envy."
+        },
+        "failure_conditions": [
+          "Supplies terms unrelated to malicious pleasure or shame (e.g. general sadness or anger).",
+          "Suggests near-identical synonyms without clear distinctions.",
+          "Invented or inaccurate dictionary definitions."
+        ]
+      }
+    },
+    {
+      "id": "WC02",
+      "feature": "word_cabinet",
+      "name": "Moral violation and fear of exposure",
+      "description": "Requests vocabulary for acute guilt complicated by terror of public disgrace.",
+      "historical_reference": "Adapted from historical WC02 (converted lexicographical question into context payload with count=4).",
+      "request_payload": {
+        "context": "An overwhelming recognition of having violated my own deepest moral code, where I cannot distinguish between sorrow for the harm done and dread of how others see me.",
+        "count": 4
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "WordCabinetResponse",
+        "entry_schema_valid": true,
+        "no_duplicate_lemmas": true,
+        "requested_count": 4,
+        "completeness_policy": "full_or_warned_partial"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "WC_CRIT_1": "Selects terms separating internal moral remorse from external social shame/disgrace.",
+          "WC_CRIT_2": "Provides clear, plain-language definitions and plausible psychological connotations.",
+          "WC_CRIT_3": "Distinctions clarify differences between guilt, shame, and mortification."
+        },
+        "failure_conditions": [
+          "Treats guilt and public shame as identical.",
+          "Provides irrelevant or generic vocabulary (e.g. 'unhappy', 'worried').",
+          "Example sentences contradict the defined meaning."
+        ]
+      }
+    },
+    {
+      "id": "WC03",
+      "feature": "word_cabinet",
+      "name": "Concealed and smoldering resentment",
+      "description": "Requests vocabulary for outwardly tolerating an insult while secretly nursing hatred.",
+      "historical_reference": "Adapted from historical WC03 into clean API request payload with count=4.",
+      "request_payload": {
+        "context": "Outwardly accepting an insult with passive acquiescence, while privately nursing a bitter and enduring resentment.",
+        "count": 4
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "WordCabinetResponse",
+        "entry_schema_valid": true,
+        "no_duplicate_lemmas": true,
+        "requested_count": 4,
+        "completeness_policy": "full_or_warned_partial"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "WC_CRIT_1": "Identifies terms specific to suppressed hostility, festering malice, or enduring bitterness.",
+          "WC_CRIT_2": "Explanations reflect varied emotional intensities and temporal persistence.",
+          "WC_CRIT_3": "Distinctions clarify differences between transient annoyance and deep rancor."
+        },
+        "failure_conditions": [
+          "Selects terms for overt aggression or violent rage.",
+          "Duplicates root words across entries.",
+          "Fails to address the suppressed, outward compliance aspect."
+        ]
+      }
+    },
+    {
+      "id": "WC04",
+      "feature": "word_cabinet",
+      "name": "Prideful refusal of vital help",
+      "description": "Requests vocabulary for stubborn resistance to dependency and fear of obligation.",
+      "historical_reference": "Adapted from historical WC04 into clean API request payload with count=3.",
+      "request_payload": {
+        "context": "Desperately needing assistance, but refusing it out of acute terror of indebtedness, dependency, and loss of pride.",
+        "count": 3
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "WordCabinetResponse",
+        "entry_schema_valid": true,
+        "no_duplicate_lemmas": true,
+        "requested_count": 3,
+        "completeness_policy": "full_or_warned_partial"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "WC_CRIT_1": "Identifies vocabulary capturing defensive pride, fear of obligation, or pathological self-reliance.",
+          "WC_CRIT_2": "Definitions accurately explain why the character resists receiving help.",
+          "WC_CRIT_3": "Distinctions separate healthy autonomy from self-destructive pride."
+        },
+        "failure_conditions": [
+          "Confuses refusal of help with simple greed, anger, or hatred.",
+          "Selects generic words like 'stubborn' without capturing the vulnerability underneath.",
+          "Example sentences fail to demonstrate the context."
+        ]
+      }
+    },
+    {
+      "id": "WC05",
+      "feature": "word_cabinet",
+      "name": "Moral grievance vs general bitterness",
+      "description": "Requests vocabulary capturing the spectrum from principled outrage to sour cynicism.",
+      "historical_reference": "Adapted from historical WC05 (converted lexical query into context payload with count=3).",
+      "request_payload": {
+        "context": "A deep, lingering anger at being treated unfairly, hovering between righteous moral grievance, smoldering personal injury, and general sourness toward the world.",
+        "count": 3
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "WordCabinetResponse",
+        "entry_schema_valid": true,
+        "no_duplicate_lemmas": true,
+        "requested_count": 3,
+        "completeness_policy": "full_or_warned_partial"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "WC_CRIT_1": "Provides precise terms distinguishing legitimate moral indignation from sour, chronic bitterness.",
+          "WC_CRIT_2": "Accurately articulates register and connotations for each term.",
+          "WC_CRIT_3": "Illustrative examples demonstrate natural, evocative usage."
+        },
+        "failure_conditions": [
+          "Treats indignation and bitterness as interchangeable.",
+          "Outputs incomplete entries or truncated JSON.",
+          "Provides identical intensity ratings for distinct emotional registers."
+        ]
+      }
+    },
+    {
+      "id": "WC06",
+      "feature": "word_cabinet",
+      "name": "Intellectual imposture and pedantic defense",
+      "description": "Requests vocabulary for intellectual insecurity masked by haughty pedantry.",
+      "historical_reference": "New Phase 4A case targeting intellectual insecurity with count=5.",
+      "request_payload": {
+        "context": "The secret panic of someone who fears their intellectual superiority is an illusion, masking their dread with condescending erudition and pedantic disdain.",
+        "count": 5
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "WordCabinetResponse",
+        "entry_schema_valid": true,
+        "no_duplicate_lemmas": true,
+        "requested_count": 5,
+        "completeness_policy": "full_or_warned_partial"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "WC_CRIT_1": "Selects sophisticated terms characterizing intellectual pretense, imposture, and defensive condescension.",
+          "WC_CRIT_2": "Clearly articulates the distinction between genuine knowledge and defensive pedantry.",
+          "WC_CRIT_3": "Examples fit natural, believable contexts of intellectual insecurity."
+        },
+        "failure_conditions": [
+          "Provides generic terms for intelligence or sadness.",
+          "Fails to capture the defensive, masking aspect of the behavior.",
+          "Repeats synonyms without differentiated connotations."
+        ]
+      }
+    },
+    {
+      "id": "WC07",
+      "feature": "word_cabinet",
+      "name": "Hollow triumph and post-success disgust",
+      "description": "Requests vocabulary for bitter emptiness and anti-climax following a major achievement.",
+      "historical_reference": "New Phase 4A case targeting post-achievement disillusionment with default count=6.",
+      "request_payload": {
+        "context": "Achieving a long-sought ambition only to discover an unbearable emptiness, accompanied by disgust at the triviality of the prize.",
+        "count": 6
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "WordCabinetResponse",
+        "entry_schema_valid": true,
+        "no_duplicate_lemmas": true,
+        "requested_count": 6,
+        "completeness_policy": "full_or_warned_partial"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "WC_CRIT_1": "Provides 6 diverse words or phrases reflecting disillusionment, hollow victory, and anti-climax.",
+          "WC_CRIT_2": "Distinguishes existential desolation from simple disappointment.",
+          "WC_CRIT_3": "Ensures all entries have complete, high-quality fields."
+        },
+        "failure_conditions": [
+          "Returns fewer than 6 usable entries without warning.",
+          "Selects terms for failure or defeat rather than success turned hollow.",
+          "JSON payload malformed or truncated."
+        ]
+      }
+    },
+    {
+      "id": "WC08",
+      "feature": "word_cabinet",
+      "name": "Ostentatious martyrdom and moral vanity",
+      "description": "Requests vocabulary for voluntary suffering weaponized for moral superiority.",
+      "historical_reference": "New Phase 4A case targeting sanctimonious self-abnegation with count=6.",
+      "request_payload": {
+        "context": "Willfully choosing to suffer discomfort and deprivation in order to maintain a private, unspoken sense of moral superiority over everyone around.",
+        "count": 6
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "WordCabinetResponse",
+        "entry_schema_valid": true,
+        "no_duplicate_lemmas": true,
+        "requested_count": 6,
+        "completeness_policy": "full_or_warned_partial"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "WC_CRIT_1": "Selects vocabulary capturing sanctimony, voluntary martyrdom, and prideful self-abnegation.",
+          "WC_CRIT_2": "Accurately dissects the false humility disguising egotism.",
+          "WC_CRIT_3": "Examples demonstrate sharp psychological subtext."
+        },
+        "failure_conditions": [
+          "Treats the suffering as purely noble or tragic without moral superiority.",
+          "Confuses martyrdom with involuntary victimization.",
+          "Duplicated lemmas across the entries."
+        ]
+      }
+    },
+    {
+      "id": "WC09",
+      "feature": "word_cabinet",
+      "name": "Unwanted compassion for an enemy",
+      "description": "Requests vocabulary for involuntary tenderness toward an adversary followed by self-disgust.",
+      "historical_reference": "New Phase 4A case targeting contradictory interpersonal emotion with count=4.",
+      "request_payload": {
+        "context": "A brief, bewildering surge of tender compassion and intimacy toward someone one normally despises, immediately followed by revulsion at one's own weakness.",
+        "count": 4
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "WordCabinetResponse",
+        "entry_schema_valid": true,
+        "no_duplicate_lemmas": true,
+        "requested_count": 4,
+        "completeness_policy": "full_or_warned_partial"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "WC_CRIT_1": "Captures the jarring oscillation between sudden empathy and immediate self-disgust.",
+          "WC_CRIT_2": "Definitions and connotations explore involuntary emotional betrayal of one's own hatred.",
+          "WC_CRIT_3": "Distinctions highlight subtle boundaries between pity, affinity, and weakness."
+        },
+        "failure_conditions": [
+          "Selects simple terms for affection or pure hatred without the collision between them.",
+          "Provides incoherent or contradictory definitions.",
+          "Invented words or jargon not established in English."
+        ]
+      }
+    },
+    {
+      "id": "WC10",
+      "feature": "word_cabinet",
+      "name": "Morbid anticipation and catastrophe craving",
+      "description": "Boundary test requesting the maximum allowed 8 entries for dread mixed with a desire for doom.",
+      "historical_reference": "New Phase 4A boundary case testing count=8 and max generation headroom.",
+      "request_payload": {
+        "context": "The complex psychological state of anticipating an inevitable catastrophe: a mixture of dread, paralysis, nervous thrill, and a dark craving for the worst to happen quickly.",
+        "count": 8
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "WordCabinetResponse",
+        "entry_schema_valid": true,
+        "no_duplicate_lemmas": true,
+        "requested_count": 8,
+        "completeness_policy": "full_or_warned_partial"
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "WC_CRIT_1": "Delivers distinct, well-calibrated entries exploring fatalism, morbid thrill, dread, and doom-craving.",
+          "WC_CRIT_2": "Preserves high definition quality across all entries without degradation at the tail.",
+          "WC_CRIT_3": "Maintains balanced intensity distribution from quiet dread to frantic thrill."
+        },
+        "failure_conditions": [
+          "Truncation or premature cessation before entries are fully generated.",
+          "Repetition of identical words or near-duplicates among entries.",
+          "Generic emotion words that ignore the dark craving/nervous thrill dimension."
+        ]
+      }
+    },
+    {
+      "id": "IM01",
+      "feature": "inner_monologue",
+      "name": "Stolen credit and reputational panic",
+      "description": "Tests conflict between impulse to confess stolen credit and dread of public exposure.",
+      "historical_reference": "Adapted from historical IM01 with explicit API parameters: perspective=first_person, 180..250 words.",
+      "request_payload": {
+        "scenario": "I have taken credit for a colleague's idea and I am about to step onto the stage to receive public praise. I want to confess the truth, but I am terrified of losing my reputation and standing.",
+        "perspective": "first_person",
+        "min_words": 180,
+        "max_words": 250
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "InnerMonologueResponse",
+        "verify_word_count_recalculation": true,
+        "verify_range_flag_integrity": true,
+        "verify_range_warning_integrity": true,
+        "expected_min_words": 180,
+        "expected_max_words": 250
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "IM_CRIT_1": "Preserves scenario facts: the narrator stole the idea, the colleague originated it, praise is imminent. Reversing ownership is a failure.",
+          "IM_CRIT_2": "Strictly adheres to requested 'first_person' narration ('I/me/my') throughout without shifting perspective.",
+          "IM_CRIT_3": "Develops the tormenting oscillation between confession desire and reputational terror without neat artificial resolution."
+        },
+        "failure_conditions": [
+          "Reverses agency (e.g. claims colleague stole idea or narrator invented it).",
+          "Shifts to third-person narration.",
+          "Resolves dilemma with an abrupt heroic confession or callous shrug."
+        ]
+      }
+    },
+    {
+      "id": "IM02",
+      "feature": "inner_monologue",
+      "name": "Academic triumph tainted by guilt and resentment",
+      "description": "Tests complex tri-part emotional collision: pleasure, guilt, and resentment at feeling guilty.",
+      "historical_reference": "Adapted from historical IM02 with explicit API parameters: perspective=first_person, 180..250 words.",
+      "request_payload": {
+        "scenario": "I received the highest mark in the examination while my closest friend, who studied twice as hard, failed. I feel an involuntary rush of triumph, acute guilt for feeling that triumph, and a bitter resentment toward him for making me feel guilty.",
+        "perspective": "first_person",
+        "min_words": 180,
+        "max_words": 250
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "InnerMonologueResponse",
+        "verify_word_count_recalculation": true,
+        "verify_range_flag_integrity": true,
+        "verify_range_warning_integrity": true,
+        "expected_min_words": 180,
+        "expected_max_words": 250
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "IM_CRIT_1": "Preserves high mark, friend's failure despite hard study, and the tripartite conflict.",
+          "IM_CRIT_2": "Strictly maintains 'first_person' narration throughout.",
+          "IM_CRIT_3": "Features authentic, convoluted psychological rationalization rather than simplistic villainy."
+        },
+        "failure_conditions": [
+          "Collapses into pure, uncomplicated saintly sympathy.",
+          "Omits the friend's failure or the narrator's high mark.",
+          "Adds implausible melodramatic backstory."
+        ]
+      }
+    },
+    {
+      "id": "IM03",
+      "feature": "inner_monologue",
+      "name": "Hesitation before apology and weaponized memory",
+      "description": "Tests using historical grievances to justify withholding a needed apology.",
+      "historical_reference": "Adapted from historical IM03 with explicit API parameters: perspective=first_person, 180..250 words.",
+      "request_payload": {
+        "scenario": "I am standing outside my sister's door after our cruel argument, intending to apologize. But with every step, old grievances and childhood slights rush back, offering me justifications to turn around and leave her in the wrong.",
+        "perspective": "first_person",
+        "min_words": 180,
+        "max_words": 250
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "InnerMonologueResponse",
+        "verify_word_count_recalculation": true,
+        "verify_range_flag_integrity": true,
+        "verify_range_warning_integrity": true,
+        "expected_min_words": 180,
+        "expected_max_words": 250
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "IM_CRIT_1": "Depicts physical threshold hesitation outside sister's door and preserves the unresolved dispute.",
+          "IM_CRIT_2": "Strictly maintains 'first_person' narration throughout.",
+          "IM_CRIT_3": "Connects present quarrel to psychological weaponization of past grievances in a coherent progression."
+        },
+        "failure_conditions": [
+          "Enters the room and engages in extensive spoken dialogue.",
+          "Completely forgets the apology intention and turns into an unrelated memoir.",
+          "Ends with a definitive, tidy moral resolution."
+        ]
+      }
+    },
+    {
+      "id": "IM04",
+      "feature": "inner_monologue",
+      "name": "Farewell gathering and unexplained distress",
+      "description": "Tests unexpected sorrow and disorientation at the departure of a disliked acquaintance.",
+      "historical_reference": "Adapted from historical IM04 with explicit API parameters: perspective=first_person, 180..250 words.",
+      "request_payload": {
+        "scenario": "Standing at the farewell party of a colleague I have privately despised for three years. As he shakes his final hands and walks out into the street, I am seized by an unexpected and suffocating distress that I cannot explain.",
+        "perspective": "first_person",
+        "min_words": 180,
+        "max_words": 250
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "InnerMonologueResponse",
+        "verify_word_count_recalculation": true,
+        "verify_range_flag_integrity": true,
+        "verify_range_warning_integrity": true,
+        "expected_min_words": 180,
+        "expected_max_words": 250
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "IM_CRIT_1": "Preserves farewell scene, three-year dislike, and sudden inexplicable distress.",
+          "IM_CRIT_2": "Strictly maintains 'first_person' narration throughout.",
+          "IM_CRIT_3": "Probes plausible psychological roots without declaring a single sterile answer or cliché."
+        },
+        "failure_conditions": [
+          "Declares narrator was secretly in love with colleague without psychological grounding.",
+          "Omits the three-year history of dislike.",
+          "Relies on generic, repetitive philosophical clichés about life."
+        ]
+      }
+    },
+    {
+      "id": "IM05",
+      "feature": "inner_monologue",
+      "name": "Broken promise and selfish rationalization",
+      "description": "Tests manufacturing false excuses to abandon a lonely relative for personal comfort.",
+      "historical_reference": "Adapted from historical IM05 with explicit API parameters: perspective=first_person, 180..250 words.",
+      "request_payload": {
+        "scenario": "I promised my lonely aunt that I would visit her small, stuffy apartment tonight. It is raining outside, my warm room is quiet with unread books, and I am drafting a telegram of false excuses while despising my own selfishness.",
+        "perspective": "first_person",
+        "min_words": 180,
+        "max_words": 250
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "InnerMonologueResponse",
+        "verify_word_count_recalculation": true,
+        "verify_range_flag_integrity": true,
+        "verify_range_warning_integrity": true,
+        "expected_min_words": 180,
+        "expected_max_words": 250
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "IM_CRIT_1": "Integrates concrete sensory contrast between the stuffy apartment/rain and comfortable garret.",
+          "IM_CRIT_2": "Strictly maintains 'first_person' narration throughout.",
+          "IM_CRIT_3": "Depicts humiliating process of inventing false pretexts while fully aware of one's pettiness."
+        },
+        "failure_conditions": [
+          "Actually goes to the aunt's house and describes the visit.",
+          "Omits drafting of excuses or aunt's lonely situation.",
+          "Contradicts the decision mid-thought without narrative logic."
+        ]
+      }
+    },
+    {
+      "id": "IM06",
+      "feature": "inner_monologue",
+      "name": "Found money from a ruined usurer",
+      "description": "Tests third-person perspective with default word range (180..250 words) on moral rationalization of theft.",
+      "historical_reference": "New Phase 4A case targeting third-person POV consistency.",
+      "request_payload": {
+        "scenario": "Mikhail has discovered a packet of money dropped by his landlord on the staircase. He knows the landlord is a usurer who ruined his cousin, yet Mikhail's hands shake with terror as he slips the banknotes into his coat pocket.",
+        "perspective": "third_person",
+        "min_words": 180,
+        "max_words": 250
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "InnerMonologueResponse",
+        "verify_word_count_recalculation": true,
+        "verify_range_flag_integrity": true,
+        "verify_range_warning_integrity": true,
+        "expected_min_words": 180,
+        "expected_max_words": 250
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "IM_CRIT_1": "Preserves staircase setting, ruined cousin, usurer, and Mikhail's physical terror.",
+          "IM_CRIT_2": "Strictly maintains third-person narration ('he/him/Mikhail') without slipping into first-person ('I/me').",
+          "IM_CRIT_3": "Captures collision between ideological justification and raw physical guilt."
+        },
+        "failure_conditions": [
+          "Slips into first-person voice.",
+          "Removes the usurer/cousin context or has Mikhail immediately surrender the money.",
+          "Turns into an omniscient police summary rather than close internal psychological monologue."
+        ]
+      }
+    },
+    {
+      "id": "IM07",
+      "feature": "inner_monologue",
+      "name": "Silent revulsion during courtship",
+      "description": "Tests third-person perspective with short range bound (80..120 words).",
+      "historical_reference": "New Phase 4A case targeting third-person POV and lower range bound.",
+      "request_payload": {
+        "scenario": "Varvara sits across from her suitor, nodding politely at his earnest talk of business while realizing with cold clarity that she would rather starve than spend forty years listening to his laugh.",
+        "perspective": "third_person",
+        "min_words": 80,
+        "max_words": 120
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "InnerMonologueResponse",
+        "verify_word_count_recalculation": true,
+        "verify_range_flag_integrity": true,
+        "verify_range_warning_integrity": true,
+        "expected_min_words": 80,
+        "expected_max_words": 120
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "IM_CRIT_1": "Preserves suitor setting, business talk, polite nods, and absolute refusal of marital prospect.",
+          "IM_CRIT_2": "Strictly maintains third-person narration ('she/her/Varvara') throughout.",
+          "IM_CRIT_3": "Demonstrates concentrated, disciplined psychological prose fitting the tight word range."
+        },
+        "failure_conditions": [
+          "Uses first-person point of view.",
+          "Softens the revulsion into gentle affection or mild hesitation.",
+          "Introduces irrelevant external action."
+        ]
+      }
+    },
+    {
+      "id": "IM08",
+      "feature": "inner_monologue",
+      "name": "The sycophant's reflection",
+      "description": "Tests first-person perspective with narrow lower-middle range bound (100..140 words).",
+      "historical_reference": "New Phase 4A case targeting tight range constraints in first-person.",
+      "request_payload": {
+        "scenario": "I caught my own reflection in a shop window while laughing sycophantically at my superior's dull joke, and the sight of my own fawning expression sickened me.",
+        "perspective": "first_person",
+        "min_words": 100,
+        "max_words": 140
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "InnerMonologueResponse",
+        "verify_word_count_recalculation": true,
+        "verify_range_flag_integrity": true,
+        "verify_range_warning_integrity": true,
+        "expected_min_words": 100,
+        "expected_max_words": 140
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "IM_CRIT_1": "Preserves shop window reflection, sycophantic laughter at superior's joke, and sickening self-disgust.",
+          "IM_CRIT_2": "Strictly maintains first-person narration throughout.",
+          "IM_CRIT_3": "Conveys physical self-disgust through vivid, disciplined imagery without padding."
+        },
+        "failure_conditions": [
+          "Shifts to third person.",
+          "Turns into an angry spoken confrontation with the superior.",
+          "Fails to address the reflection or the fawning laughter."
+        ]
+      }
+    },
+    {
+      "id": "IM09",
+      "feature": "inner_monologue",
+      "name": "Midnight vigil before broken engagement",
+      "description": "Tests first-person perspective with upper-tier word range (320..400 words).",
+      "historical_reference": "New Phase 4A case targeting sustained length, stamina, and psychological progression.",
+      "request_payload": {
+        "scenario": "I have resolved to break off my engagement tomorrow morning. In the quiet of my garret at midnight, I pace between drafting cold, rational explanations and imagining her weeping, torn between the craving for freedom and the certainty of my own damnation.",
+        "perspective": "first_person",
+        "min_words": 320,
+        "max_words": 400
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "InnerMonologueResponse",
+        "verify_word_count_recalculation": true,
+        "verify_range_flag_integrity": true,
+        "verify_range_warning_integrity": true,
+        "expected_min_words": 320,
+        "expected_max_words": 400
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "IM_CRIT_1": "Preserves resolved broken engagement, midnight garret pacing, drafting explanations, and her anticipated weeping.",
+          "IM_CRIT_2": "Strictly maintains first-person narration throughout.",
+          "IM_CRIT_3": "Sustains coherent psychological development over 320–400 words without vacuous circularity or phrase looping."
+        },
+        "failure_conditions": [
+          "Falls into repetitive phrase looping to pad length.",
+          "Shifts to third-person narration.",
+          "Has the narrator change their mind and stay happily engaged."
+        ]
+      }
+    },
+    {
+      "id": "IM10",
+      "feature": "inner_monologue",
+      "name": "The courtroom and factual falsehood",
+      "description": "Tests third-person perspective with upper-tier word range (300..380 words).",
+      "historical_reference": "New Phase 4A case targeting sustained third-person courtroom introspection.",
+      "request_payload": {
+        "scenario": "Dmitri stands in the courtroom listening to the prosecutor describe his crime with methodical, calm logic. Every word is factually true, yet Dmitri feels the prosecutor understands nothing of why the knife was raised.",
+        "perspective": "third_person",
+        "min_words": 300,
+        "max_words": 380
+      },
+      "automated_contract_checks": {
+        "expected_status": 200,
+        "schema": "InnerMonologueResponse",
+        "verify_word_count_recalculation": true,
+        "verify_range_flag_integrity": true,
+        "verify_range_warning_integrity": true,
+        "expected_min_words": 300,
+        "expected_max_words": 380
+      },
+      "human_evaluation": {
+        "criteria_guidance": {
+          "IM_CRIT_1": "Preserves Dmitri in courtroom, prosecutor's methodical logic, factual truth of crime, and the gulf between legal logic and inner truth.",
+          "IM_CRIT_2": "Strictly maintains third-person narration ('Dmitri/he/him') throughout.",
+          "IM_CRIT_3": "Develops the profound paradox between factual accuracy and psychological reality without descending into chaotic raving."
+        },
+        "failure_conditions": [
+          "Shifts to first-person point of view.",
+          "Denies the crime occurred, contradicting the scenario.",
+          "Replaces internal monologue with a transcript of courtroom dialogue."
+        ]
+      }
+    }
+  ]
+}

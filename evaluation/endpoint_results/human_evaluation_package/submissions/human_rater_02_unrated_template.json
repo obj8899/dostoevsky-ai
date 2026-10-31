@@ -1,0 +1,585 @@
+{
+  "metadata": {
+    "title": "Dostoevsky AI Blinded Human-Primary Evaluation Response Template",
+    "version": "1.0.0",
+    "status": "HUMAN-PRIMARY — UNRATED",
+    "source_run_id": "run_20261025T180347Z_63cb94586e9f4132adf9952aae03efbb",
+    "total_items": 30,
+    "total_ratings": 90,
+    "rater_id": null,
+    "submitted_at_utc": null,
+    "instructions": "Assign integer scores 1-5 for each criterion. Provide concrete textual quotations in evidence_notes. Provide boundary_notes where scores sit on the edge between two ratings."
+  },
+  "items": [
+    {
+      "item_id": "LR_ITEM_01",
+      "feature": "literary_rewrite",
+      "scores": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "evidence_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "boundary_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "LR_ITEM_02",
+      "feature": "literary_rewrite",
+      "scores": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "evidence_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "boundary_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "LR_ITEM_03",
+      "feature": "literary_rewrite",
+      "scores": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "evidence_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "boundary_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "LR_ITEM_04",
+      "feature": "literary_rewrite",
+      "scores": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "evidence_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "boundary_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "LR_ITEM_05",
+      "feature": "literary_rewrite",
+      "scores": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "evidence_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "boundary_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "LR_ITEM_06",
+      "feature": "literary_rewrite",
+      "scores": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "evidence_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "boundary_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "LR_ITEM_07",
+      "feature": "literary_rewrite",
+      "scores": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "evidence_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "boundary_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "LR_ITEM_08",
+      "feature": "literary_rewrite",
+      "scores": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "evidence_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "boundary_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "LR_ITEM_09",
+      "feature": "literary_rewrite",
+      "scores": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "evidence_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "boundary_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "LR_ITEM_10",
+      "feature": "literary_rewrite",
+      "scores": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "evidence_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      },
+      "boundary_notes": {
+        "LR_CRIT_1": null,
+        "LR_CRIT_2": null,
+        "LR_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "WC_ITEM_01",
+      "feature": "word_cabinet",
+      "scores": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "evidence_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "boundary_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "WC_ITEM_02",
+      "feature": "word_cabinet",
+      "scores": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "evidence_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "boundary_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "WC_ITEM_03",
+      "feature": "word_cabinet",
+      "scores": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "evidence_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "boundary_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "WC_ITEM_04",
+      "feature": "word_cabinet",
+      "scores": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "evidence_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "boundary_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "WC_ITEM_05",
+      "feature": "word_cabinet",
+      "scores": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "evidence_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "boundary_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "WC_ITEM_06",
+      "feature": "word_cabinet",
+      "scores": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "evidence_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "boundary_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "WC_ITEM_07",
+      "feature": "word_cabinet",
+      "scores": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "evidence_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "boundary_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "WC_ITEM_08",
+      "feature": "word_cabinet",
+      "scores": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "evidence_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "boundary_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "WC_ITEM_09",
+      "feature": "word_cabinet",
+      "scores": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "evidence_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "boundary_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "WC_ITEM_10",
+      "feature": "word_cabinet",
+      "scores": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "evidence_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      },
+      "boundary_notes": {
+        "WC_CRIT_1": null,
+        "WC_CRIT_2": null,
+        "WC_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "IM_ITEM_01",
+      "feature": "inner_monologue",
+      "scores": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "evidence_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "boundary_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "IM_ITEM_02",
+      "feature": "inner_monologue",
+      "scores": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "evidence_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "boundary_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "IM_ITEM_03",
+      "feature": "inner_monologue",
+      "scores": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "evidence_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "boundary_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "IM_ITEM_04",
+      "feature": "inner_monologue",
+      "scores": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "evidence_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "boundary_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "IM_ITEM_05",
+      "feature": "inner_monologue",
+      "scores": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "evidence_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "boundary_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "IM_ITEM_06",
+      "feature": "inner_monologue",
+      "scores": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "evidence_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "boundary_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "IM_ITEM_07",
+      "feature": "inner_monologue",
+      "scores": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "evidence_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "boundary_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "IM_ITEM_08",
+      "feature": "inner_monologue",
+      "scores": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "evidence_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "boundary_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "IM_ITEM_09",
+      "feature": "inner_monologue",
+      "scores": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "evidence_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "boundary_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      }
+    },
+    {
+      "item_id": "IM_ITEM_10",
+      "feature": "inner_monologue",
+      "scores": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "evidence_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      },
+      "boundary_notes": {
+        "IM_CRIT_1": null,
+        "IM_CRIT_2": null,
+        "IM_CRIT_3": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "metadata": {
+    "title": "Dostoevsky AI EXP-WC-02 Inter-Rater Agreement Analysis",
+    "experiment_id": "EXP-WC-02-DISTINCTION-STRUCTURE",
+    "analyzed_at_utc": "2026-10-30T16:54:45.655964+00:00",
+    "raters": [
+      "human_rater_01",
+      "human_rater_02"
+    ],
+    "scale": "1-5 integer Likert scale",
+    "total_paired_observations": 60
+  },
+  "overall": {
+    "name": "Overall (All 60 Ratings)",
+    "n": 60,
+    "exact_count": 35,
+    "exact_pct": 58.33,
+    "within_1_count": 60,
+    "within_1_pct": 100.0,
+    "disagreement_gt_1_count": 0,
+    "disagreement_gt_1_pct": 0.0,
+    "mean_absolute_disagreement": 0.4167,
+    "quadratic_weighted_cohen_kappa": 0.3781,
+    "unweighted_cohen_kappa": 0.2142,
+    "disagreement_distribution": {
+      "0_points": 35,
+      "1_points": 25,
+      "2_points": 0,
+      "3_points": 0,
+      "4_points": 0
+    }
+  },
+  "by_criterion": {
+    "WC_CRIT_1": {
+      "name": "Criterion WC_CRIT_1",
+      "n": 20,
+      "exact_count": 12,
+      "exact_pct": 60.0,
+      "within_1_count": 20,
+      "within_1_pct": 100.0,
+      "disagreement_gt_1_count": 0,
+      "disagreement_gt_1_pct": 0.0,
+      "mean_absolute_disagreement": 0.4,
+      "quadratic_weighted_cohen_kappa": 0.5556,
+      "unweighted_cohen_kappa": 0.3496,
+      "disagreement_distribution": {
+        "0_points": 12,
+        "1_points": 8,
+        "2_points": 0,
+        "3_points": 0,
+        "4_points": 0
+      }
+    },
+    "WC_CRIT_2": {
+      "name": "Criterion WC_CRIT_2",
+      "n": 20,
+      "exact_count": 13,
+      "exact_pct": 65.0,
+      "within_1_count": 20,
+      "within_1_pct": 100.0,
+      "disagreement_gt_1_count": 0,
+      "disagreement_gt_1_pct": 0.0,
+      "mean_absolute_disagreement": 0.35,
+      "quadratic_weighted_cohen_kappa": 0.4068,
+      "unweighted_cohen_kappa": 0.3,
+      "disagreement_distribution": {
+        "0_points": 13,
+        "1_points": 7,
+        "2_points": 0,
+        "3_points": 0,
+        "4_points": 0
+      }
+    },
+    "WC_CRIT_3": {
+      "name": "Criterion WC_CRIT_3",
+      "n": 20,
+      "exact_count": 10,
+      "exact_pct": 50.0,
+      "within_1_count": 20,
+      "within_1_pct": 100.0,
+      "disagreement_gt_1_count": 0,
+      "disagreement_gt_1_pct": 0.0,
+      "mean_absolute_disagreement": 0.5,
+      "quadratic_weighted_cohen_kappa": -0.0417,
+      "unweighted_cohen_kappa": -0.1494,
+      "disagreement_distribution": {
+        "0_points": 10,
+        "1_points": 10,
+        "2_points": 0,
+        "3_points": 0,
+        "4_points": 0
+      }
+    }
+  },
+  "by_condition": {
+    "baseline": {
+      "name": "Baseline Condition (30 Ratings)",
+      "n": 30,
+      "exact_count": 13,
+      "exact_pct": 43.33,
+      "within_1_count": 30,
+      "within_1_pct": 100.0,
+      "disagreement_gt_1_count": 0,
+      "disagreement_gt_1_pct": 0.0,
+      "mean_absolute_disagreement": 0.5667,
+      "quadratic_weighted_cohen_kappa": 0.2006,
+      "unweighted_cohen_kappa": -0.0345,
+      "disagreement_distribution": {
+        "0_points": 13,
+        "1_points": 17,
+        "2_points": 0,
+        "3_points": 0,
+        "4_points": 0
+      }
+    },
+    "experimental": {
+      "name": "Experimental Condition (30 Ratings)",
+      "n": 30,
+      "exact_count": 22,
+      "exact_pct": 73.33,
+      "within_1_count": 30,
+      "within_1_pct": 100.0,
+      "disagreement_gt_1_count": 0,
+      "disagreement_gt_1_pct": 0.0,
+      "mean_absolute_disagreement": 0.2667,
+      "quadratic_weighted_cohen_kappa": 0.5714,
+      "unweighted_cohen_kappa": 0.4619,
+      "disagreement_distribution": {
+        "0_points": 22,
+        "1_points": 8,
+        "2_points": 0,
+        "3_points": 0,
+        "4_points": 0
+      }
+    }
+  }
+}

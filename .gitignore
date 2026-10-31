@@ -37,3 +37,7 @@ Thumbs.db
 # Generated evaluation outputs
 evaluation/results/
 evaluation/reports/
+
+# Private blinded-evaluation keys
+/evaluation/endpoint_results/blinded_human_evaluation_key_run_20261025T180347Z.json
+/evaluation/experiments/exp_wc_02_distinction_structure/blinded_evaluation_key_20_items.json
