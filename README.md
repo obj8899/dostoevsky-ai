@@ -1,291 +1,549 @@
-# Dostoevsky AI
+ <div align="center">
 
-> *Where Language Meets the Human Psyche.*
+# ✒ DOSTOEVSKY AI
 
-**Dostoevsky AI** is a local-first literary writing and vocabulary assistant inspired by the psychological and philosophical themes of Fyodor Dostoevsky. The application serves a locally hosted language model to help writers explore the contradictions of human consciousness, moral ambivalence, pride, alienation, and introspective character monologues.
+### THE UNDERGROUND STUDY
 
-Built with **FastAPI**, **React 18**, **TypeScript**, and **Ollama**, the project emphasizes privacy, reproducible local inference, defensive structured JSON validation, and rigorous empirical evaluation.
+**Where Language Meets the Human Psyche.**
 
----
+*A local-first literary writing and vocabulary assistant inspired by the psychological depth and philosophical complexity of Fyodor Dostoevsky.*
 
-## 1. Project Overview & Core Studios
+<br/>
 
-The application provides three specialized creative studios within a cohesive dark academia interface ("The Underground Study"):
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev/)
+[![Ollama](https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white)](https://ollama.com/)
 
-1. **Studio 01: Literary Rewrite (`#rewrite`)**  
-   Transforms ordinary, flat prose into psychologically layered, introspective writing. The model emphasizes hesitation, subtext, and emotional tension while strictly preserving factual narrative details and relationships.
-2. **Studio 02: Word Cabinet (`#word-cabinet`)**  
-   Explores precise vocabulary for nuanced or conflicting emotional states. Generates structured entries complete with grammatical part of speech, plain-language definitions, emotional connotation, intensity ratings (1–5), subtle distinctions from nearest synonyms, and natural usage examples.
-3. **Studio 03: Inner Monologue (`#inner-monologue`)**  
-   Composes original interior monologues capturing conflicting motives, moral anxiety, and self-interrogation across first-person ("I") or third-person perspectives, with user-configurable word count ranges.
+<br/>
 
----
+**LOCAL-FIRST AI · LITERARY INTELLIGENCE · PROMPT ENGINEERING**
 
-## 2. Interface Demonstration & Screenshot Checklist
+<br/>
 
-The user interface is styled according to **The Underground Study** design specification—utilizing aged parchment tones, dark ink backgrounds (`#161513`), literary serif typography, and restrained warm brass accents (`#c98a2c`).
+[Explore Features](#-the-experience) · [Architecture](#-system-architecture) · [Evaluation](#-empirical-evaluation) · [Installation](#-getting-started)
 
-### Visual Documentation Status
-No image files are currently committed to the repository. Evaluators running the application locally will see the live interface across the following views:
+<br/>
 
-- [ ] **Literary Rewrite Studio View:** Split-pane editor showing source passage, rewriting indicator, and side-by-side recast output with copy action.
-- [ ] **Word Cabinet Studio View:** Input context, suggestion count selector (3–8 entries), latency helper copy, and interactive vocabulary card grid with intensity badges.
-- [ ] **Inner Monologue Studio View:** Situation prompt, point-of-view toggle, target length bounds, and generated introspective stream with word-count verification.
-- [ ] **System Health Bar:** Real-time indicator displaying the connection state between backend API and local Ollama daemon.
-
-*(A visual asset gallery will be captured and added prior to tagged public distribution).*
+</div>
 
 ---
 
-## 3. Technology Stack
+## ◈ The Idea
 
-### Frontend Architecture
-- **Framework:** React 18.3.1 with TypeScript ~5.6.3
-- **Bundler & Tooling:** Vite 8.3.5
-- **Testing:** Vitest 5.0.5, `@testing-library/react` 16.3.3, `@testing-library/user-event` 14.6.8, `jsdom` 29.1.1
-- **Styling:** Custom CSS design system (`tokens.css`, `global.css`) with zero third-party component libraries
-- **State Architecture:** HTML5 DOM panel retention via `hidden` attributes, preserving drafts across studio navigation without third-party state bloat
-- **Routing:** Bidirectional URL hash routing (`#rewrite`, `#word-cabinet`, `#inner-monologue`) with full browser history support
+What if artificial intelligence could help you explore not just what you write, but how you express the complexities behind it?
 
-### Backend Architecture
-- **Framework:** FastAPI 0.115+ running on Uvicorn 0.32+
-- **Data Validation:** Pydantic 2.6+ with strict request bounds, custom field validators, and runtime schema enforcement
-- **HTTP Client:** HTTPX 0.27+ with explicit connection and generation timeout separation (3s connect, 180s read)
-- **Testing:** Pytest 8.4.2 with AnyIO 4.15 and Starlette TestClient
+**Dostoevsky AI** is an experimental literary intelligence application that brings together local language model inference, prompt engineering, and an elegant writing environment.
 
-### Model & Local Inference Pipeline
-- **Base Model:** `qwen2.5:3b` (Qwen Team, Alibaba Cloud)
-- **Quantization:** `Q4_K_M` (4-bit medium quantization via llama.cpp)
-- **Serving Engine:** Local Ollama runtime (`http://localhost:11434`)
-- **Serving Model:** `dostoevsky-baseline:latest` configured via root `Modelfile`
-- **Model Configuration:** Prompt-configured base model with targeted sampling parameters (`temperature 0.85`, `top_p 0.9`, `repeat_penalty 1.1`, `num_ctx 4096`). **Weights are prompt-engineered, not fine-tuned.**
+Inspired by the psychological and philosophical themes of Fyodor Dostoevsky, the application offers three specialized AI experiences:
+
+- **Literary Rewrite** — Transform ordinary writing into more expressive literary prose.
+- **Word Cabinet** — Explore vocabulary through contextual and literary explanations.
+- **Inner Monologue** — Generate introspective writing shaped around internal conflict and human contradictions.
+
+Rather than relying on a conventional cloud chatbot, Dostoevsky AI uses a locally hosted language model through Ollama.
+
+The result is a privacy-conscious, locally executable AI writing environment.
 
 ---
 
-## 4. Architecture Overview
+## ◈ Inside The Underground Study
+
+<div align="center">
+
+### A closer look at the application
+
+<img src="docs/screenshots/landing-page.png" alt="Dostoevsky AI landing page" width="100%"/>
+
+*The Underground Study — the home of literary exploration.*
+
+</div>
+
+### Three ways to explore language
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### 01. Literary Rewrite
+
+<img src="docs/screenshots/literary-rewrite.png" alt="Literary Rewrite feature interface" width="100%"/>
+
+Transform ordinary text into expressive literary prose while attempting to preserve the original meaning and intent.
+
+**Focus:** Style transformation, literary expression, semantic preservation.
+
+</td>
+<td width="50%" valign="top">
+
+### 02. Word Cabinet
+
+<img src="docs/screenshots/word-cabinet.png" alt="Word Cabinet vocabulary assistant interface" width="100%"/>
+
+Explore vocabulary through contextual explanations and literary language.
+
+**Focus:** Vocabulary exploration, contextual understanding, expressive language.
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### 03. Inner Monologue
+
+<img src="docs/screenshots/inner-monologue.png" alt="Inner Monologue generation interface" width="100%"/>
+
+Generate introspective monologues exploring contradictory emotions, internal conflict, and psychological depth.
+
+**Focus:** Introspection, narrative voice, psychological expression.
+
+</td>
+<td width="50%" valign="top">
+
+### 04. The Literary Identity
+
+<img src="docs/screenshots/about-fyodor.png" alt="About Fyodor page of Dostoevsky AI" width="100%"/>
+
+A dedicated interface celebrating the literary inspiration behind the project.
+
+**Focus:** Product identity, literary inspiration, visual storytelling.
+
+</td>
+</tr>
+</table>
+
+### A study in light and shadow
+
+<table>
+<tr>
+<td width="50%">
+
+<img src="docs/screenshots/dark-mode.png" alt="Dostoevsky AI dark theme" width="100%"/>
+
+<p align="center"><b>Dark Mode</b></p>
+
+</td>
+<td width="50%">
+
+<img src="docs/screenshots/light-mode.png" alt="Dostoevsky AI light theme" width="100%"/>
+
+<p align="center"><b>Light Mode</b></p>
+
+</td>
+</tr>
+</table>
+
+---
+
+## ◈ The Experience
+
+| Feature | Purpose | AI capability |
+|---|---|---|
+| Literary Rewrite | Transform writing style | Prompt-guided text generation |
+| Word Cabinet | Explore vocabulary | Contextual language generation |
+| Inner Monologue | Create introspective prose | Structured creative generation |
+
+Each feature uses a specialized interaction and prompt workflow rather than treating every request as an identical chat conversation.
+
+---
+
+## ◈ System Architecture
+
+Dostoevsky AI follows a local-first client-server architecture.
+
+The frontend handles user interaction, the backend manages application logic and request validation, and Ollama serves the local language model.
 
 ```mermaid
 flowchart TD
-    subgraph Browser ["Frontend (React 18 + TypeScript)"]
-        UI["Underground Study UI"]
-        Nav["Hash Navigation (#rewrite, #word-cabinet, #inner-monologue)"]
-        Client["Typed API Client (client.ts)"]
-        DOMRet["DOM Panel Retention (HTML5 hidden)"]
-    end
+    A["User"] --> B["React + TypeScript Frontend"]
+    B --> C["FastAPI Backend"]
+    C --> D["Pydantic Validation"]
+    D --> E["Feature-specific Prompt Logic"]
+    E --> F["Ollama Runtime"]
+    F --> G["Qwen2.5 3B"]
+    G --> H["Generated Response"]
+    H --> I["Backend Response Processing"]
+    I --> B
+    B --> J["Rendered Literary Experience"]
 
-    subgraph Backend ["Backend API (FastAPI + Pydantic)"]
-        Gateway["FastAPI App (main.py)"]
-        CORS["CORS Middleware (localhost:5173)"]
-        Val["Pydantic Request Validation"]
-        
-        subgraph Endpoints ["Feature Endpoints"]
-            EP_LR["POST /api/features/literary-rewrite"]
-            EP_WC["POST /api/features/word-cabinet"]
-            EP_IM["POST /api/features/inner-monologue"]
-            EP_H["GET /api/health"]
-        end
-        
-        subgraph Services ["Feature Services"]
-            SVC_LR["LiteraryRewriteService"]
-            SVC_WC["WordCabinetService (JSON Parser & Deduplicator)"]
-            SVC_IM["InnerMonologueService (Word Count Validator)"]
-        end
-        
-        OllamaCl["OllamaClient (HTTPX, 180s Timeout)"]
-    end
-
-    subgraph Inference ["Local Inference (Ollama)"]
-        OllamaD["Ollama Daemon (:11434)"]
-        Model["dostoevsky-baseline:latest (Qwen2.5 3B Q4_K_M)"]
-    end
-
-    UI --> Nav
-    UI --> DOMRet
-    UI --> Client
-    Client -- "HTTP JSON" --> Gateway
-    Gateway --> CORS
-    CORS --> Val
-    Val --> Endpoints
-    EP_LR --> SVC_LR
-    EP_WC --> SVC_WC
-    EP_IM --> SVC_IM
-    SVC_LR --> OllamaCl
-    SVC_WC --> OllamaCl
-    SVC_IM --> OllamaCl
-    OllamaCl -- "REST API (/api/generate)" --> OllamaD
-    OllamaD --> Model
+    style A fill:#303030,color:#fff,stroke:#c6a66b
+    style G fill:#303030,color:#fff,stroke:#c6a66b
+    style J fill:#303030,color:#fff,stroke:#c6a66b
 ```
 
-### Verified API Endpoints
-- `GET  /api/health` — Checks backend status and probes Ollama availability.
-- `POST /api/features/literary-rewrite` — Recasts prose up to 5,000 characters.
-- `POST /api/features/word-cabinet` — Generates 3 to 8 structured vocabulary entries from emotional context (up to 2,000 characters). Overrides `num_predict: 1400` for JSON completeness.
-- `POST /api/features/inner-monologue` — Generates 50 to 500 word interior monologue with target range validation.
+### Architectural responsibilities
+
+| Layer | Responsibility |
+|---|---|
+| Frontend | User interface, feature interactions and response presentation |
+| Backend | API handling, application logic and orchestration |
+| Validation | Structured request validation using Pydantic |
+| Prompt layer | Feature-specific prompt construction |
+| Inference runtime | Local model execution through Ollama |
+| Language model | Qwen2.5 3B text generation |
+
+### Request lifecycle
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User
+    participant UI as React Frontend
+    participant API as FastAPI
+    participant Prompt as Prompt Logic
+    participant Ollama
+    participant LLM as Qwen2.5 3B
+
+    User->>UI: Submit feature request
+    UI->>API: Send API request
+    API->>API: Validate request
+    API->>Prompt: Select feature workflow
+    Prompt->>Ollama: Submit model request
+    Ollama->>LLM: Run local inference
+    LLM-->>Ollama: Generated text
+    Ollama-->>API: Model response
+    API-->>UI: Return structured response
+    UI-->>User: Display generated result
+```
 
 ---
 
-## 5. Prerequisites & Environment
+## ◈ How The AI Works
 
-Verify your system meets the following prerequisites before setup:
-- **Operating System:** Windows, macOS, or Linux (commands below use Windows PowerShell).
-- **Python:** Python 3.11 or higher (tested on Python 3.13.5).
-- **Node.js:** Node.js 18.x or higher (tested on Node.js 20+).
-- **npm:** npm 9.x or higher.
-- **Ollama:** Installed and running locally ([ollama.com](https://ollama.com)).
-- **Hardware Guidance:** 8 GB RAM minimum; 16 GB recommended for smooth 3B model execution. Disk storage requires ~2.5 GB for Ollama weights.
+The application uses feature-specific prompt engineering around a locally hosted language model.
+
+### Model configuration
+
+| Component | Configuration |
+|---|---|
+| Base model | Qwen2.5 3B |
+| Inference runtime | Ollama |
+| Custom model | `dostoevsky-baseline:latest` |
+| AI approach | Prompt engineering |
+| Execution | Local inference |
+| Fine-tuning | Not performed |
+
+**An important distinction:** Dostoevsky AI does not claim to train or fine-tune its own foundation model. Its engineering focus is on designing specialized LLM workflows, prompt structures, validation, inference integration, and empirical evaluation.
+
+### Feature-specific AI workflow
+
+```mermaid
+flowchart TD
+    A["User Input"] --> B{"Select Feature"}
+
+    B --> C["Literary Rewrite"]
+    B --> D["Word Cabinet"]
+    B --> E["Inner Monologue"]
+
+    C --> F["Literary Style Prompt"]
+    D --> G["Vocabulary Prompt"]
+    E --> H["Introspective Writing Prompt"]
+
+    F --> I["Local LLM Inference"]
+    G --> I
+    H --> I
+
+    I --> J["Generated Text"]
+    J --> K["Response Processing"]
+    K --> L["Frontend Presentation"]
+
+    style I fill:#303030,color:#fff,stroke:#c6a66b
+    style L fill:#303030,color:#fff,stroke:#c6a66b
+```
 
 ---
 
-## 6. Installation & Quick Start
+## ◈ Technology Stack
 
-Open PowerShell and follow these step-by-step instructions:
+The project combines modern frontend engineering, Python backend development, and local language model inference.
 
-### Step 1: Model Setup in Ollama
-Ensure the Ollama application or daemon is active:
-```powershell
-# 1. Pull the base Qwen2.5 3B model
+<div align="center">
+
+### Frontend
+
+[![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
+
+### Backend
+
+[![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Pydantic](https://img.shields.io/badge/Pydantic-E92063?style=flat-square&logo=pydantic&logoColor=white)](https://docs.pydantic.dev/)
+
+### AI / ML
+
+[![Ollama](https://img.shields.io/badge/Ollama-000000?style=flat-square&logo=ollama&logoColor=white)](https://ollama.com/)
+[![Qwen](https://img.shields.io/badge/Qwen-6E56CF?style=flat-square&logoColor=white)](https://qwenlm.github.io/)
+
+### Development and Quality
+
+[![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)](https://git-scm.com/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/)
+
+</div>
+
+---
+
+## ◈ Empirical Evaluation
+
+A central part of this project is evaluating generated outputs rather than assuming that a prompt change automatically produces better results.
+
+The project uses human rubric-based evaluation and controlled prompt experiments to investigate output quality across its three features.
+
+### Historical baseline results
+
+<div align="center">
+
+| Metric | Result |
+|---|---:|
+| Overall mean | **3.00 / 5** |
+| Test cases | **15** |
+| Criterion ratings | **45** |
+
+</div>
+
+### Feature-level results
+
+```mermaid
+xychart-beta
+    title "Historical Baseline Human Evaluation"
+    x-axis ["Literary Rewrite", "Word Cabinet", "Inner Monologue"]
+    y-axis "Mean score (out of 5)" 0 --> 5
+    bar [2.93, 2.53, 3.53]
+```
+
+| Feature | Baseline mean |
+|---|---:|
+| Literary Rewrite | 2.93 / 5 |
+| Word Cabinet | 2.53 / 5 |
+| Inner Monologue | 3.53 / 5 |
+
+*These are historical baseline human-rubric results from 15 test cases and 45 criterion ratings. They are not universal quality scores or benchmark accuracy.*
+
+### Experimentation philosophy
+
+```mermaid
+flowchart TD
+    A["Verified Baseline"] --> B["Define Hypothesis"]
+    B --> C["Design Prompt Experiment"]
+    C --> D["Run Controlled Evaluation"]
+    D --> E["Human Assessment"]
+    E --> F{"Evidence of Improvement?"}
+    F -->|Yes| G["Validate and Retain Candidate"]
+    F -->|No| H["Reject or Roll Back"]
+    G --> I["Document Findings"]
+    H --> I
+
+    style A fill:#303030,color:#fff,stroke:#c6a66b
+    style H fill:#5b2929,color:#fff,stroke:#d98282
+    style G fill:#24563b,color:#fff,stroke:#80c99c
+```
+
+### A negative result is still a result
+
+The Word Cabinet EXP-WC-02 experiment did not demonstrate improvement.
+
+The human evaluation produced a score delta of **-0.20**, leading to a rollback to the verified baseline prompt.
+
+Verified baseline prompt hash:
+
+`be472f536fbb27ed460f03e744889c95af91db3a8f8ac8809992ac55dd447686`
+
+This is an important part of the project's development philosophy:
+
+- Hypotheses must be tested.
+- Results must be evaluated.
+- Negative findings must be preserved.
+- Experimental changes must earn their place through evidence.
+- The baseline should remain active when an experiment fails to demonstrate improvement.
+
+The objective is not to make every experiment look successful. It is to make engineering decisions based on evidence.
+
+---
+
+## ◈ Privacy-First by Design
+
+Dostoevsky AI is designed around local execution.
+
+Its local-first approach aims to keep model inference on the user's own machine rather than depending on a third-party hosted LLM API.
+
+Key design principles:
+
+- Locally hosted model inference.
+- Local application execution.
+- No requirement for a third-party LLM API for the documented inference workflow.
+- Clear separation between frontend, backend, and model runtime.
+
+Privacy statements should be understood within the scope of the verified application implementation. Local execution does not by itself guarantee complete device security.
+
+---
+
+## ◈ Getting Started
+
+### Prerequisites
+
+Install the following:
+
+- Python.
+- Node.js and npm.
+- Ollama.
+- Git.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/obj8899/dostoevsky-ai.git
+cd dostoevsky-ai
+```
+
+### 2. Set up the local language model
+
+Install and start Ollama, then retrieve the Qwen2.5 3B base model:
+
+```bash
 ollama pull qwen2.5:3b
-
-# 2. Build the baseline serving model from the repository root Modelfile
-ollama create dostoevsky-baseline -f ./Modelfile
-
-# 3. Confirm model availability
-ollama list
 ```
 
-### Step 2: Backend Setup
-In a dedicated PowerShell window:
-```powershell
-# Navigate to backend directory
+The application uses the custom Ollama model `dostoevsky-baseline:latest`. Follow the repository's model configuration and Modelfile instructions to create it if it is not already available.
+
+### 3. Configure the backend
+
+Navigate to the backend directory:
+
+```bash
 cd backend
-
-# Create virtual environment
-python -m venv .venv
-
-# Activate virtual environment
-.\.venv\Scripts\Activate.ps1
-
-# Install backend dependencies in editable development mode
-python -m pip install -e ".[dev]"
-
-# Start the FastAPI server
-uvicorn dostoevsky_ai.main:app --host 127.0.0.1 --port 8000 --app-dir src --reload
 ```
-The backend health endpoint is available at `http://127.0.0.1:8000/api/health`.
 
-### Step 3: Frontend Setup
-In a second PowerShell window:
-```powershell
-# Navigate to frontend directory
+Install the Python dependencies using the dependency file provided in the repository.
+
+Configure any required environment variables using the supplied example configuration.
+
+Start the backend using the launch instructions documented in the backend configuration.
+
+### 4. Start the frontend
+
+Open another terminal in the repository root:
+
+```bash
 cd frontend
-
-# Install dependencies
 npm install
-
-# Start Vite development server
-npm run dev
 ```
-Open your browser to `http://localhost:5173`.
+
+Start the frontend using the development script defined in `frontend/package.json`.
+
+> **Note:** Verify the backend dependency filename, environment variables, startup command, and frontend script against the current repository before using these instructions. Do not assume default ports or configuration values.
 
 ---
 
-## 7. Testing & Verification
+## ◈ Project Structure
 
-The repository maintains full automated test coverage across both frontend and backend suites. All tests execute independently without requiring a running Ollama daemon.
-
-### Run All Backend Tests (Pytest)
-```powershell
-backend\.venv\Scripts\python.exe -m pytest backend/tests
+```text
+dostoevsky-ai/
+│
+├── backend/
+│   └── FastAPI application and backend logic
+│
+├── frontend/
+│   ├── public/
+│   └── src/
+│       ├── components/
+│       ├── pages/
+│       ├── data/
+│       ├── styles/
+│       └── utils/
+│
+├── scripts/
+│   └── Corpus processing and validation utilities
+│
+├── evaluation/
+│   ├── Experiments
+│   ├── Evaluation harnesses
+│   └── Aggregate evaluation reports
+│
+├── docs/
+│   └── screenshots/
+│
+├── Modelfile
+├── README.md
+└── .env.example
 ```
-*Current test suite:* **82 passed**, 0 failures across 5 test suites.
 
-### Run All Frontend Tests (Vitest)
-```powershell
-npm test --prefix frontend
-```
-*Current test suite:* **55 passed**, 0 failures across 6 test files.
-
-### Typecheck & Production Build
-```powershell
-# TypeScript compilation check
-node frontend/node_modules/typescript/bin/tsc --noEmit -p frontend/tsconfig.app.json
-
-# Production asset build
-npm run build --prefix frontend
-```
-*Verification status:* 0 type errors; production bundle built cleanly in ~400ms (gzip 53.5 kB).
+*Directory descriptions are representative; consult the repository for the complete current structure.*
 
 ---
 
-## 8. Empirical Evaluation & Scientific Rigor
+## ◈ Limitations
 
-A central differentiator of Dostoevsky AI is its commitment to **hypothesis falsification and empirical integrity**. Rather than claiming unverified improvements, the repository separates evidence into five distinct tiers:
+Dostoevsky AI is an experimental local-first LLM application, not a claim of human-level literary understanding.
 
-```
-+-----------------------------------------------------------------------------------+
-| Tier 1: AI-Assisted Preliminary Evaluations                                       |
-| Automated LLM-as-a-judge scoring on 15 synthetic canonical test cases (Phase 4).  |
-+-----------------------------------------------------------------------------------+
-                                          |
-+-----------------------------------------------------------------------------------+
-| Tier 2: Algorithmic Prompt Experimentation (EXP-WC-01)                             |
-| Evaluated anti-echo directives. Rejected due to severe vocabulary relevance drop. |
-+-----------------------------------------------------------------------------------+
-                                          |
-+-----------------------------------------------------------------------------------+
-| Tier 3: Contemporaneous Double-Blind Human Evaluation (EXP-WC-02)                 |
-| 20 blinded items, 2 independent raters, 120 ratings, Cohen's kappa (Phase 6E).    |
-| RESULT: REJECTED (delta -0.20 on distinction usefulness; rater 2 delta -0.40 on   |
-| relevance). Automated cryptographic rollback to verified baseline prompt.         |
-+-----------------------------------------------------------------------------------+
-                                          |
-+-----------------------------------------------------------------------------------+
-| Tier 4: Live Integration Testing (Phase 7C)                                       |
-| Measured real inference latencies, word counts, and schema validation.            |
-+-----------------------------------------------------------------------------------+
-                                          |
-+-----------------------------------------------------------------------------------+
-| Tier 5: Qualitative Literary Appraisal                                            |
-| Descriptive appraisal of psychological rhythm, moral tension, and dark irony.     |
-+-----------------------------------------------------------------------------------+
-```
+Known considerations include:
 
-### The EXP-WC-02 Falsification Case Study
-In experiment `EXP-WC-02-DISTINCTION-STRUCTURE`, structured distinction guidance was introduced to eliminate synonym circularity. 
-- In a pre-registered double-blind evaluation, two human raters independently scored 20 randomized, blinded outputs using an established 1–5 rubric.
-- Inter-rater agreement reached 100% within 1 point and quadratic weighted Cohen's \(\kappa = 0.3781\).
-- Both raters observed a **-0.20 delta** in distinction usefulness, noting that forced distinction structures sounded mechanical and degraded overall vocabulary relevance.
-- Under pre-registered decision rules (reject if delta \(\le 0.00\)), the experiment was decisively **REJECTED**, and the system prompt was immediately restored to the verified baseline hash (`be472f536fbb27ed460f03e744889c95af91db3a8f8ac8809992ac55dd447686`).
+- The 3B parameter model has limitations in complex generation tasks.
+- Literary rewrites may introduce semantic drift.
+- Vocabulary explanations require independent correctness checks.
+- Generated outputs may not always comply with requested word counts.
+- Output quality can vary between prompts and inputs.
+- Local inference performance depends on available hardware.
+- The model has not been fine-tuned for this application.
+- The historical human evaluation uses a relatively small sample.
+
+These limitations are part of the engineering problem being explored.
 
 ---
 
-## 9. Privacy, Security & Disclosed Limitations
+## ◈ Roadmap
 
-### Privacy & Data Handling
-- **Local-First Privacy:** All prompt processing occurs in local RAM on your machine.
-- **Zero Logging:** User input, drafts, and generated responses are never logged to console, disk, or external servers.
-- **No Telemetry:** Zero external tracking, analytics, or third-party API keys required.
+The project can evolve through evidence-driven development.
 
-### Disclosed Operational Limitations
-- **Local Hardware Latency:** On local CPUs, generation times vary. Literary Rewrite averages ~18s; 6 structured Word Cabinet entries take ~76s. Users can select 4 words to reduce latency.
-- **3B Model Length Variance:** Smaller 3B models tend to under-generate on long targets (e.g. generating 147 words when 180 words are requested). The system transparently flags length mismatches in `validation_warnings` rather than silently masking them.
-- **Vocabulary Connotation:** Vocabulary suggestions and distinctions are creative stylistic aids, not authoritative lexicographical or clinical psychological definitions.
-- **Controlled Local Scope:** The application is architected for single-user desktop exploration. It does not provide multi-tenant authentication, user management, or distributed queueing.
-
----
-
-## 10. Future Roadmap
-
-Planned enhancements for future iterations:
-- [ ] **Streaming Responses (SSE):** Token streaming for Literary Rewrite and Inner Monologue to eliminate perceived waiting time.
-- [ ] **Fine-Tuning Investigation (LoRA):** Exploration of low-rank parameter-efficient adapters trained on public domain 19th-century psychological prose.
-- [ ] **GPU Layer Offloading:** Automated detection of dedicated GPU acceleration (`num_gpu`) in Ollama Modelfile.
-- [ ] **Export Capabilities:** Markdown and text export for generated drafts and vocabulary collections.
+- [x] Local language model integration.
+- [x] Three specialized AI writing features.
+- [x] FastAPI backend.
+- [x] React and TypeScript frontend.
+- [x] Human rubric-based evaluation.
+- [x] Controlled prompt experiments.
+- [x] Experimental rollback based on evaluation.
+- [ ] Expanded evaluation coverage.
+- [ ] Further prompt optimization.
+- [ ] Improved generation consistency.
+- [ ] Additional evaluation and usability improvements.
 
 ---
 
-## 11. Attribution & License
+## ◈ The Philosophy Behind The Project
 
-- **Attribution:** Inspired by the literary works, themes, and psychological explorations of Fyodor Dostoevsky.
-- **Corpus Texts:** Public-domain source texts referenced in development are sourced from Project Gutenberg and kept locally excluded from Git.
-- **License Status:** No open-source license file is currently included in this repository. All rights are reserved by the authors. Local cloning and evaluation for portfolio inspection is permitted.
+> "The mystery of human existence lies not in just staying alive, but in finding something to live for."
+
+Dostoevsky's literary world is filled with contradiction, introspection, moral uncertainty, and the complexity of human consciousness.
+
+This project explores how modern language models can be used as tools for literary expression and creative exploration.
+
+It is not about replacing the writer.
+
+It is about giving language another dimension.
+
+---
+
+<div align="center">
+
+## DOSTOEVSKY AI
+
+### THE UNDERGROUND STUDY
+
+*Built at the intersection of literature, language, and artificial intelligence.*
+
+<br/>
+
+**Designed for exploration. Engineered for experimentation. Grounded in evidence.**
+
+<br/>
+
+[GitHub Repository](https://github.com/obj8899/dostoevsky-ai)
+
+<br/>
+
+<sub>Inspired by the literary legacy of Fyodor Dostoevsky.</sub>
+
+</div>
