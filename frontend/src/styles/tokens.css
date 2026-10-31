@@ -1,0 +1,37 @@
+:root {
+  color-scheme: dark;
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --ink-950: #111211;
+  --ink-900: #191a18;
+  --ink-800: #242521;
+  --paper-100: #f4f0e7;
+  --paper-200: #e7e0d2;
+  --text-primary: #f2eee5;
+  --text-muted: #b9b5ab;
+  --brass-500: #b69a62;
+  --success: #739078;
+  --warning: #c69b5b;
+  --error: #c4776b;
+
+  --font-editorial: "Iowan Old Style", "Palatino Linotype", "Book Antiqua",
+    Georgia, serif;
+  --font-ui: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --line-subtle: 1px solid var(--ink-800);
+  --radius-control: 7px;
+  --radius-panel: 11px;
+  --shadow-paper: 0 24px 56px rgb(0 0 0 / 13%);
+}
+
